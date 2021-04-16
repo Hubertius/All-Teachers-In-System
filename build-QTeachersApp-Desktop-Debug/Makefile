@@ -52,12 +52,37 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../QTeachersApp/main.cpp \
-		../QTeachersApp/View/loginwindow.cpp moc_loginwindow.cpp
-OBJECTS       = main.o \
+SOURCES       = ../QTeachersApp/View/create.cpp \
+		../QTeachersApp/View/delete.cpp \
+		../QTeachersApp/View/read.cpp \
+		../QTeachersApp/View/update.cpp \
+		../QTeachersApp/main.cpp \
+		../QTeachersApp/View/loginwindow.cpp \
+		../QTeachersApp/View/mainview.cpp \
+		../QTeachersApp/utils.cpp qrc_TeachersAppResources.cpp \
+		moc_create.cpp \
+		moc_delete.cpp \
+		moc_loginwindow.cpp \
+		moc_mainview.cpp \
+		moc_read.cpp \
+		moc_update.cpp
+OBJECTS       = create.o \
+		delete.o \
+		read.o \
+		update.o \
+		main.o \
 		loginwindow.o \
-		moc_loginwindow.o
+		mainview.o \
+		utils.o \
+		qrc_TeachersAppResources.o \
+		moc_create.o \
+		moc_delete.o \
+		moc_loginwindow.o \
+		moc_mainview.o \
+		moc_read.o \
+		moc_update.o
 DIST          = ../QTeachersApp/DataBases/guestLogin.txt \
+		../QTeachersApp/DataBases/login.db \
 		../QTeachersApp/DataBases/teachers.db \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -135,8 +160,20 @@ DIST          = ../QTeachersApp/DataBases/guestLogin.txt \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../QTeachersApp/QTeachersApp.pro ../QTeachersApp/View/loginwindow.h ../QTeachersApp/main.cpp \
-		../QTeachersApp/View/loginwindow.cpp
+		../QTeachersApp/QTeachersApp.pro ../QTeachersApp/View/create.h \
+		../QTeachersApp/View/delete.h \
+		../QTeachersApp/View/loginwindow.h \
+		../QTeachersApp/View/mainview.h \
+		../QTeachersApp/View/read.h \
+		../QTeachersApp/View/update.h \
+		../QTeachersApp/utils.h ../QTeachersApp/View/create.cpp \
+		../QTeachersApp/View/delete.cpp \
+		../QTeachersApp/View/read.cpp \
+		../QTeachersApp/View/update.cpp \
+		../QTeachersApp/main.cpp \
+		../QTeachersApp/View/loginwindow.cpp \
+		../QTeachersApp/View/mainview.cpp \
+		../QTeachersApp/utils.cpp
 QMAKE_TARGET  = QTeachersApp
 DESTDIR       = 
 TARGET        = QTeachersApp
@@ -145,7 +182,7 @@ TARGET        = QTeachersApp
 first: all
 ####### Build rules
 
-QTeachersApp: ui_loginwindow.h $(OBJECTS)  
+QTeachersApp: ui_create.h ui_delete.h ui_loginwindow.h ui_mainview.h ui_read.h ui_update.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../QTeachersApp/QTeachersApp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -224,7 +261,8 @@ Makefile: ../QTeachersApp/QTeachersApp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../QTeachersApp/QTeachersApp.pro
+		../QTeachersApp/QTeachersApp.pro \
+		../QTeachersApp/TeachersAppResources.qrc
 	$(QMAKE) -o Makefile ../QTeachersApp/QTeachersApp.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf:
@@ -303,6 +341,7 @@ Makefile: ../QTeachersApp/QTeachersApp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../QTeachersApp/QTeachersApp.pro:
+../QTeachersApp/TeachersAppResources.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../QTeachersApp/QTeachersApp.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 
@@ -317,10 +356,11 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../QTeachersApp/TeachersAppResources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QTeachersApp/View/loginwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../QTeachersApp/main.cpp ../QTeachersApp/View/loginwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QTeachersApp/View/loginwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../QTeachersApp/View/create.h ../QTeachersApp/View/delete.h ../QTeachersApp/View/loginwindow.h ../QTeachersApp/View/mainview.h ../QTeachersApp/View/read.h ../QTeachersApp/View/update.h ../QTeachersApp/utils.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../QTeachersApp/View/create.cpp ../QTeachersApp/View/delete.cpp ../QTeachersApp/View/read.cpp ../QTeachersApp/View/update.cpp ../QTeachersApp/main.cpp ../QTeachersApp/View/loginwindow.cpp ../QTeachersApp/View/mainview.cpp ../QTeachersApp/utils.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../QTeachersApp/View/create.ui ../QTeachersApp/View/delete.ui ../QTeachersApp/View/loginwindow.ui ../QTeachersApp/View/mainview.ui ../QTeachersApp/View/read.ui ../QTeachersApp/View/update.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -344,32 +384,85 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_TeachersAppResources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_TeachersAppResources.cpp
+qrc_TeachersAppResources.cpp: ../QTeachersApp/TeachersAppResources.qrc \
+		/usr/lib/qt5/bin/rcc
+	/usr/lib/qt5/bin/rcc -name TeachersAppResources ../QTeachersApp/TeachersAppResources.qrc -o qrc_TeachersAppResources.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_loginwindow.cpp
+compiler_moc_header_make_all: moc_create.cpp moc_delete.cpp moc_loginwindow.cpp moc_mainview.cpp moc_read.cpp moc_update.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_loginwindow.cpp
+	-$(DEL_FILE) moc_create.cpp moc_delete.cpp moc_loginwindow.cpp moc_mainview.cpp moc_read.cpp moc_update.cpp
+moc_create.cpp: ../QTeachersApp/View/create.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/create.h -o moc_create.cpp
+
+moc_delete.cpp: ../QTeachersApp/View/delete.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/delete.h -o moc_delete.cpp
+
 moc_loginwindow.cpp: ../QTeachersApp/View/loginwindow.h \
+		../QTeachersApp/View/mainview.h \
+		../QTeachersApp/utils.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/loginwindow.h -o moc_loginwindow.cpp
+
+moc_mainview.cpp: ../QTeachersApp/View/mainview.h \
+		../QTeachersApp/utils.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/mainview.h -o moc_mainview.cpp
+
+moc_read.cpp: ../QTeachersApp/View/read.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/read.h -o moc_read.cpp
+
+moc_update.cpp: ../QTeachersApp/View/update.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/update.h -o moc_update.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_loginwindow.h
+compiler_uic_make_all: ui_create.h ui_delete.h ui_loginwindow.h ui_mainview.h ui_read.h ui_update.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_loginwindow.h
+	-$(DEL_FILE) ui_create.h ui_delete.h ui_loginwindow.h ui_mainview.h ui_read.h ui_update.h
+ui_create.h: ../QTeachersApp/View/create.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../QTeachersApp/View/create.ui -o ui_create.h
+
+ui_delete.h: ../QTeachersApp/View/delete.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../QTeachersApp/View/delete.ui -o ui_delete.h
+
 ui_loginwindow.h: ../QTeachersApp/View/loginwindow.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ../QTeachersApp/View/loginwindow.ui -o ui_loginwindow.h
+
+ui_mainview.h: ../QTeachersApp/View/mainview.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../QTeachersApp/View/mainview.ui -o ui_mainview.h
+
+ui_read.h: ../QTeachersApp/View/read.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../QTeachersApp/View/read.ui -o ui_read.h
+
+ui_update.h: ../QTeachersApp/View/update.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../QTeachersApp/View/update.ui -o ui_update.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -377,19 +470,69 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
-main.o: ../QTeachersApp/main.cpp ../QTeachersApp/View/loginwindow.h
+create.o: ../QTeachersApp/View/create.cpp ../QTeachersApp/View/create.h \
+		ui_create.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o create.o ../QTeachersApp/View/create.cpp
+
+delete.o: ../QTeachersApp/View/delete.cpp ../QTeachersApp/View/delete.h \
+		ui_delete.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o delete.o ../QTeachersApp/View/delete.cpp
+
+read.o: ../QTeachersApp/View/read.cpp ../QTeachersApp/View/read.h \
+		ui_read.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o read.o ../QTeachersApp/View/read.cpp
+
+update.o: ../QTeachersApp/View/update.cpp ../QTeachersApp/View/update.h \
+		ui_update.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o update.o ../QTeachersApp/View/update.cpp
+
+main.o: ../QTeachersApp/main.cpp ../QTeachersApp/View/loginwindow.h \
+		../QTeachersApp/View/mainview.h \
+		../QTeachersApp/utils.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QTeachersApp/main.cpp
 
 loginwindow.o: ../QTeachersApp/View/loginwindow.cpp ../QTeachersApp/View/loginwindow.h \
+		../QTeachersApp/View/mainview.h \
+		../QTeachersApp/utils.h \
 		ui_loginwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loginwindow.o ../QTeachersApp/View/loginwindow.cpp
 
+mainview.o: ../QTeachersApp/View/mainview.cpp ../QTeachersApp/View/mainview.h \
+		../QTeachersApp/utils.h \
+		ui_mainview.h \
+		../QTeachersApp/View/read.h \
+		../QTeachersApp/View/create.h \
+		../QTeachersApp/View/update.h \
+		../QTeachersApp/View/delete.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainview.o ../QTeachersApp/View/mainview.cpp
+
+utils.o: ../QTeachersApp/utils.cpp ../QTeachersApp/utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o utils.o ../QTeachersApp/utils.cpp
+
+qrc_TeachersAppResources.o: qrc_TeachersAppResources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_TeachersAppResources.o qrc_TeachersAppResources.cpp
+
+moc_create.o: moc_create.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_create.o moc_create.cpp
+
+moc_delete.o: moc_delete.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_delete.o moc_delete.cpp
+
 moc_loginwindow.o: moc_loginwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_loginwindow.o moc_loginwindow.cpp
+
+moc_mainview.o: moc_mainview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainview.o moc_mainview.cpp
+
+moc_read.o: moc_read.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_read.o moc_read.cpp
+
+moc_update.o: moc_update.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_update.o moc_update.cpp
 
 ####### Install
 

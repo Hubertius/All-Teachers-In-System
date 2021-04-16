@@ -2,21 +2,27 @@
 #define UPDATE_H
 
 #include <QWidget>
-
-namespace Ui {
-class Update;
+#include <QtSql>
+#include <QtDebug>
+#include <QSqlError>
+namespace Ui
+{
+    class Update;
 }
 
-class Update : public QWidget
+namespace HubertiusNamespace
 {
-    Q_OBJECT
+    class Update : public QWidget
+    {
+        Q_OBJECT
 
-public:
-    explicit Update(QWidget *parent = nullptr);
-    ~Update();
+    public:
+        explicit Update(QWidget *parent, QSqlDatabase * database);
+        ~Update();
 
-private:
-    Ui::Update *ui;
-};
-
+    private:
+        QSqlDatabase * myTeachersDatabase;
+        Ui::Update *ui;
+    };
+}
 #endif // UPDATE_H

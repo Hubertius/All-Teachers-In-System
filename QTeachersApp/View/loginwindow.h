@@ -2,13 +2,14 @@
 #define LOGINWINDOW_H
 
 #include <QMainWindow> 
-#include <QtSql> // for creation (or connection) to SQLite database
-#include <QtDebug>
-#include <QFileInfo>
-
+#include "mainview.h"
+#include "utils.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class LoginWindow; }
+namespace Ui
+{
+    class LoginWindow;
+}
 QT_END_NAMESPACE
 
 namespace HubertiusNamespace
@@ -26,8 +27,13 @@ namespace HubertiusNamespace
         void on_btnLogin_clicked();
 
     private:
+        const QString & PATH = "/home/hubertius/All-Teachers-In-System/QTeachersApp/DataBases/login.sqlite";
+        QSqlDatabase  myDatabase;
         Ui::LoginWindow *ui;
-        QSqlDatabase myDatabase;
+
+    public:
+        friend void connClose(QSqlDatabase * myDatabase);
+        friend bool connOpen(QSqlDatabase * myDatabase, const QString & PATH);
     };
 }
 #endif // LOGINWINDOW_H

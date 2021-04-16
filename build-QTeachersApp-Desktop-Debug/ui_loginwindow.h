@@ -41,6 +41,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *labelPassword;
     QLineEdit *lineEditPassword;
+    QLabel *label;
     QStatusBar *statusbar;
     QMenuBar *menubar;
     QMenu *menuLogin_to_Teachers_APP;
@@ -49,7 +50,7 @@ public:
     {
         if (LoginWindow->objectName().isEmpty())
             LoginWindow->setObjectName(QString::fromUtf8("LoginWindow"));
-        LoginWindow->resize(503, 410);
+        LoginWindow->resize(640, 410);
         centralwidget = new QWidget(LoginWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         label_ConnStat = new QLabel(centralwidget);
@@ -94,19 +95,23 @@ public:
 
         lineEditPassword = new QLineEdit(layoutWidget);
         lineEditPassword->setObjectName(QString::fromUtf8("lineEditPassword"));
+        lineEditPassword->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_2->addWidget(lineEditPassword);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(30, 30, 171, 181));
         LoginWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(LoginWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         LoginWindow->setStatusBar(statusbar);
         menubar = new QMenuBar(LoginWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 503, 20));
+        menubar->setGeometry(QRect(0, 0, 640, 20));
         menuLogin_to_Teachers_APP = new QMenu(menubar);
         menuLogin_to_Teachers_APP->setObjectName(QString::fromUtf8("menuLogin_to_Teachers_APP"));
         LoginWindow->setMenuBar(menubar);
@@ -130,6 +135,7 @@ public:
         btnLogin->setText(QApplication::translate("LoginWindow", "Login", nullptr));
         labelUsername->setText(QApplication::translate("LoginWindow", "Username", nullptr));
         labelPassword->setText(QApplication::translate("LoginWindow", "Password", nullptr));
+        label->setText(QString());
         menuLogin_to_Teachers_APP->setTitle(QApplication::translate("LoginWindow", "Login to Teachers APP", nullptr));
     } // retranslateUi
 

@@ -1,14 +1,19 @@
 #include "create.h"
 #include "ui_create.h"
 
-Create::Create(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Create)
+namespace HubertiusNamespace
 {
-    ui->setupUi(this);
-}
+    Create::Create(QWidget *parent, QSqlDatabase * database):
+        myTeachersDatabase(database),
+        QWidget(parent),
+        ui(new Ui::Create)
+    {
+        ui->setupUi(this);
 
-Create::~Create()
-{
-    delete ui;
+    }
+
+    Create::~Create()
+    {
+        delete ui;
+    }
 }

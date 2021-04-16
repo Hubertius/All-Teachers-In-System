@@ -2,21 +2,28 @@
 #define READ_H
 
 #include <QWidget>
-
-namespace Ui {
-class Read;
+#include <QtSql>
+#include <QtDebug>
+#include <QSqlError>
+namespace Ui
+{
+    class Read;
 }
 
-class Read : public QWidget
+namespace HubertiusNamespace
 {
-    Q_OBJECT
+    class Read : public QWidget
+    {
+        Q_OBJECT
 
-public:
-    explicit Read(QWidget *parent = nullptr);
-    ~Read();
+    public:
+        explicit Read(QWidget *parent, QSqlDatabase * database);
+        ~Read();
 
-private:
-    Ui::Read *ui;
-};
+    private:
+        QSqlDatabase * myTeachersDatabase;
+        Ui::Read *ui;
+    };
+}
 
 #endif // READ_H

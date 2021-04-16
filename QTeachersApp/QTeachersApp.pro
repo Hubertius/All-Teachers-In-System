@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT     += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,14 +16,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    View/create.cpp \
+    View/delete.cpp \
+    View/read.cpp \
+    View/update.cpp \
     main.cpp \
-    View/loginwindow.cpp
+    View/loginwindow.cpp \
+    View/mainview.cpp \
+    utils.cpp
 
 HEADERS += \
-    View/loginwindow.h
+    View/create.h \
+    View/delete.h \
+    View/loginwindow.h \
+    View/mainview.h \
+    View/read.h \
+    View/update.h \
+    utils.h
 
 FORMS += \
-    View/loginwindow.ui
+    View/create.ui \
+    View/delete.ui \
+    View/loginwindow.ui \
+    View/mainview.ui \
+    View/read.ui \
+    View/update.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -32,4 +49,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     DataBases/guestLogin.txt \
+    DataBases/login.db \
     DataBases/teachers.db
+
+RESOURCES += \
+    TeachersAppResources.qrc

@@ -1,22 +1,29 @@
 #ifndef CREATE_H
 #define CREATE_H
-
 #include <QWidget>
+#include <QtSql>
+#include <QtDebug>
+#include <QSqlError>
 
-namespace Ui {
-class Create;
+namespace Ui
+{
+    class Create;
 }
 
-class Create : public QWidget
+namespace HubertiusNamespace
 {
-    Q_OBJECT
 
-public:
-    explicit Create(QWidget *parent = nullptr);
-    ~Create();
+    class Create : public QWidget
+    {
+        Q_OBJECT
 
-private:
-    Ui::Create *ui;
-};
+    public:
+        explicit Create(QWidget *parent, QSqlDatabase * database);
+        ~Create();
 
+    private:
+        QSqlDatabase * myTeachersDatabase;
+        Ui::Create *ui;
+    };
+}
 #endif // CREATE_H

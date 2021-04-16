@@ -83,7 +83,9 @@ OBJECTS       = create.o \
 		moc_update.o
 DIST          = ../QTeachersApp/DataBases/guestLogin.txt \
 		../QTeachersApp/DataBases/login.db \
+		../QTeachersApp/DataBases/login.sqlite \
 		../QTeachersApp/DataBases/teachers.db \
+		../QTeachersApp/DataBases/teachers.sqlite \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \

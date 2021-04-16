@@ -30,17 +30,17 @@ namespace HubertiusNamespace
         if((*myTeachersDatabase).isOpen())
         {
             qInfo("I'm in creation mode right now!");
-            QSqlQuery query("INSERT INTO Teachers (Name, Surname, Sex, PESEL, Title, DateOfBirth, ListOfSubjects) VALUES ('"+name+"', '"+surname+"', '"+sex+"', '"+pesel+"', '"+dateOfBirth+"', '"+title+"', '"+listOfSubjects+"')");
+            QSqlQuery query("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES ('"+name+"', '"+surname+"', '"+sex+"', '"+pesel+"', '"+dateOfBirth+"', '"+title+"', '"+listOfSubjects+"')");
             if(query.exec())
             {
-                qInfo << "Everything is working and you querry was added to your teachers database. :)"
+                qInfo() << "Everything is working and you querry was added to your teachers database. :)";
             }
             else
             {
                 qDebug() << "Something went terribly wrong.";
             }
 
-            }
+         }
             ui->lineEdit_name->setText("");
             ui->lineEdit_surname->setText("");
             ui->lineEdit_sex->setText("");
@@ -48,8 +48,8 @@ namespace HubertiusNamespace
             ui->lineEdit_dateOfBirth->setText("");
             ui->lineEdit_title->setText("");
             ui->lineEdit_listOfSubjects->setText("");
-        }
-    }
+     }
+
 
 }
 

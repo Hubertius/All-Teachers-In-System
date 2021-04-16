@@ -50,7 +50,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     DataBases/guestLogin.txt \
     DataBases/login.db \
-    DataBases/teachers.db
+    DataBases/login.sqlite \
+    DataBases/teachers.db \
+    DataBases/teachers.sqlite
 
 RESOURCES += \
     TeachersAppResources.qrc

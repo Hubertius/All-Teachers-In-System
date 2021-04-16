@@ -27,28 +27,27 @@ public:
     QVBoxLayout *verticalLayout;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout_2;
-    QLabel *labelCreateConn;
     QHBoxLayout *horizontalLayout_7;
-    QLabel *label;
-    QLineEdit *lineEdit;
+    QLabel *label_name;
+    QLineEdit *lineEdit_name;
     QHBoxLayout *horizontalLayout_6;
-    QLabel *label_2;
-    QLineEdit *lineEdit_2;
+    QLabel *label_surname;
+    QLineEdit *lineEdit_surname;
     QHBoxLayout *horizontalLayout_5;
-    QLabel *label_3;
-    QLineEdit *lineEdit_3;
+    QLabel *label_sex;
+    QLineEdit *lineEdit_sex;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *label_4;
-    QLineEdit *lineEdit_4;
+    QLabel *label_pesel;
+    QLineEdit *lineEdit_pesel;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *label_6;
-    QLineEdit *lineEdit_6;
+    QLabel *label_dateOfBirth;
+    QLineEdit *lineEdit_dateOfBirth;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *label_5;
-    QLineEdit *lineEdit_5;
+    QLabel *label_title;
+    QLineEdit *lineEdit_title;
     QHBoxLayout *horizontalLayout;
-    QLabel *label_7;
-    QLineEdit *lineEdit_7;
+    QLabel *label_listOfSubjects;
+    QLineEdit *lineEdit_listOfSubjects;
     QPushButton *pushButton;
 
     void setupUi(QWidget *Create)
@@ -62,112 +61,107 @@ public:
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         verticalLayout_2 = new QVBoxLayout(groupBox);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        labelCreateConn = new QLabel(groupBox);
-        labelCreateConn->setObjectName(QString::fromUtf8("labelCreateConn"));
-
-        verticalLayout_2->addWidget(labelCreateConn);
-
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        label = new QLabel(groupBox);
-        label->setObjectName(QString::fromUtf8("label"));
+        label_name = new QLabel(groupBox);
+        label_name->setObjectName(QString::fromUtf8("label_name"));
 
-        horizontalLayout_7->addWidget(label);
+        horizontalLayout_7->addWidget(label_name);
 
-        lineEdit = new QLineEdit(groupBox);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit_name = new QLineEdit(groupBox);
+        lineEdit_name->setObjectName(QString::fromUtf8("lineEdit_name"));
 
-        horizontalLayout_7->addWidget(lineEdit);
+        horizontalLayout_7->addWidget(lineEdit_name);
 
 
         verticalLayout_2->addLayout(horizontalLayout_7);
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        label_2 = new QLabel(groupBox);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_surname = new QLabel(groupBox);
+        label_surname->setObjectName(QString::fromUtf8("label_surname"));
 
-        horizontalLayout_6->addWidget(label_2);
+        horizontalLayout_6->addWidget(label_surname);
 
-        lineEdit_2 = new QLineEdit(groupBox);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        lineEdit_surname = new QLineEdit(groupBox);
+        lineEdit_surname->setObjectName(QString::fromUtf8("lineEdit_surname"));
 
-        horizontalLayout_6->addWidget(lineEdit_2);
+        horizontalLayout_6->addWidget(lineEdit_surname);
 
 
         verticalLayout_2->addLayout(horizontalLayout_6);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        label_3 = new QLabel(groupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_sex = new QLabel(groupBox);
+        label_sex->setObjectName(QString::fromUtf8("label_sex"));
 
-        horizontalLayout_5->addWidget(label_3);
+        horizontalLayout_5->addWidget(label_sex);
 
-        lineEdit_3 = new QLineEdit(groupBox);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+        lineEdit_sex = new QLineEdit(groupBox);
+        lineEdit_sex->setObjectName(QString::fromUtf8("lineEdit_sex"));
 
-        horizontalLayout_5->addWidget(lineEdit_3);
+        horizontalLayout_5->addWidget(lineEdit_sex);
 
 
         verticalLayout_2->addLayout(horizontalLayout_5);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        label_4 = new QLabel(groupBox);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_pesel = new QLabel(groupBox);
+        label_pesel->setObjectName(QString::fromUtf8("label_pesel"));
 
-        horizontalLayout_4->addWidget(label_4);
+        horizontalLayout_4->addWidget(label_pesel);
 
-        lineEdit_4 = new QLineEdit(groupBox);
-        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+        lineEdit_pesel = new QLineEdit(groupBox);
+        lineEdit_pesel->setObjectName(QString::fromUtf8("lineEdit_pesel"));
 
-        horizontalLayout_4->addWidget(lineEdit_4);
+        horizontalLayout_4->addWidget(lineEdit_pesel);
 
 
         verticalLayout_2->addLayout(horizontalLayout_4);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        label_6 = new QLabel(groupBox);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_dateOfBirth = new QLabel(groupBox);
+        label_dateOfBirth->setObjectName(QString::fromUtf8("label_dateOfBirth"));
 
-        horizontalLayout_2->addWidget(label_6);
+        horizontalLayout_2->addWidget(label_dateOfBirth);
 
-        lineEdit_6 = new QLineEdit(groupBox);
-        lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
+        lineEdit_dateOfBirth = new QLineEdit(groupBox);
+        lineEdit_dateOfBirth->setObjectName(QString::fromUtf8("lineEdit_dateOfBirth"));
 
-        horizontalLayout_2->addWidget(lineEdit_6);
+        horizontalLayout_2->addWidget(lineEdit_dateOfBirth);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label_5 = new QLabel(groupBox);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_title = new QLabel(groupBox);
+        label_title->setObjectName(QString::fromUtf8("label_title"));
 
-        horizontalLayout_3->addWidget(label_5);
+        horizontalLayout_3->addWidget(label_title);
 
-        lineEdit_5 = new QLineEdit(groupBox);
-        lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
+        lineEdit_title = new QLineEdit(groupBox);
+        lineEdit_title->setObjectName(QString::fromUtf8("lineEdit_title"));
 
-        horizontalLayout_3->addWidget(lineEdit_5);
+        horizontalLayout_3->addWidget(lineEdit_title);
 
 
         verticalLayout_2->addLayout(horizontalLayout_3);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label_7 = new QLabel(groupBox);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_listOfSubjects = new QLabel(groupBox);
+        label_listOfSubjects->setObjectName(QString::fromUtf8("label_listOfSubjects"));
 
-        horizontalLayout->addWidget(label_7);
+        horizontalLayout->addWidget(label_listOfSubjects);
 
-        lineEdit_7 = new QLineEdit(groupBox);
-        lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
+        lineEdit_listOfSubjects = new QLineEdit(groupBox);
+        lineEdit_listOfSubjects->setObjectName(QString::fromUtf8("lineEdit_listOfSubjects"));
 
-        horizontalLayout->addWidget(lineEdit_7);
+        horizontalLayout->addWidget(lineEdit_listOfSubjects);
 
 
         verticalLayout_2->addLayout(horizontalLayout);
@@ -190,14 +184,13 @@ public:
     {
         Create->setWindowTitle(QApplication::translate("Create", "Form", nullptr));
         groupBox->setTitle(QString());
-        labelCreateConn->setText(QApplication::translate("Create", "TextLabel", nullptr));
-        label->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Name</span></p></body></html>", nullptr));
-        label_2->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Surname</span></p></body></html>", nullptr));
-        label_3->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Sex</span></p></body></html>", nullptr));
-        label_4->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">PESEL</span></p></body></html>", nullptr));
-        label_6->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Date of Birth</span></p></body></html>", nullptr));
-        label_5->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Title</span></p></body></html>", nullptr));
-        label_7->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">List of Subjects</span></p></body></html>", nullptr));
+        label_name->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Name</span></p></body></html>", nullptr));
+        label_surname->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Surname</span></p></body></html>", nullptr));
+        label_sex->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Sex</span></p></body></html>", nullptr));
+        label_pesel->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">PESEL</span></p></body></html>", nullptr));
+        label_dateOfBirth->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Date of Birth</span></p></body></html>", nullptr));
+        label_title->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Title</span></p></body></html>", nullptr));
+        label_listOfSubjects->setText(QApplication::translate("Create", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">List of Subjects</span></p></body></html>", nullptr));
         pushButton->setText(QApplication::translate("Create", "PushButton", nullptr));
     } // retranslateUi
 

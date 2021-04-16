@@ -21,6 +21,9 @@ namespace HubertiusNamespace
         explicit Create(QWidget *parent, QSqlDatabase * database);
         ~Create();
 
+    private slots:
+        void on_pushButton_clicked();
+
     private:
         QSqlDatabase * myTeachersDatabase;
         Ui::Create *ui;

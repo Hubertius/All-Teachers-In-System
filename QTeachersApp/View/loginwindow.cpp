@@ -31,10 +31,12 @@ namespace HubertiusNamespace
             if(!query.next())
             {
                qDebug() << "Something went terribly wrong!";
-               ui->label_ConnStat->setText("Somethin went wrong when searching for your login data ins sytem. :(");
+               ui->label_ConnStat->setText("Something went wrong when searching for your login data\n in system. :(");
                qInfo() << "Querry error: " << query.lastError().text();
+               ui->lineEditUsername->setText("");
+               ui->lineEditPassword->setText("");
             }
-            else if(!query.first()) // incorrect username or passwordSomethin went wrong when searching for your login data ins sytem.  :(
+            else if(!query.first()) //
             {
                 ui->label_ConnStat->setText("Incorrect username or pasword!");
             }

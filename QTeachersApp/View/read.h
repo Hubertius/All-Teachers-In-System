@@ -20,6 +20,9 @@ namespace HubertiusNamespace
         explicit Read(QWidget *parent, QSqlDatabase * database);
         ~Read();
 
+    private slots:
+        void on_pushButton_clicked();
+
     private:
         QSqlDatabase * myTeachersDatabase;
         Ui::Read *ui;

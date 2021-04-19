@@ -30,7 +30,13 @@ namespace HubertiusNamespace
         if((*myTeachersDatabase).isOpen())
         {
             qInfo("I'm in creation mode right now!");
-            QSqlQuery query("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES ('"+name+"', '"+surname+"', '"+sex+"', '"+pesel+"', '"+dateOfBirth+"', '"+title+"', '"+listOfSubjects+"')");
+            if( !dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) )
+            {
+                clearingLineEdits();
+                return;
+            }
+            QSqlQuery query;
+            query.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES ('"+name+"', '"+surname+"', '"+sex+"', '"+pesel+"', '"+dateOfBirth+"', '"+title+"', '"+listOfSubjects+"')");
             if(query.exec())
             {
                 qInfo() << "Everything is working and you querry was added to your teachers database. :)";
@@ -41,15 +47,19 @@ namespace HubertiusNamespace
             }
 
          }
-            ui->lineEdit_name->setText("");
-            ui->lineEdit_surname->setText("");
-            ui->lineEdit_sex->setText("");
-            ui->lineEdit_pesel->setText("");
-            ui->lineEdit_dateOfBirth->setText("");
-            ui->lineEdit_title->setText("");
-            ui->lineEdit_listOfSubjects->setText("");
+       clearingLineEdits();
      }
 
+     void Create::clearingLineEdits()
+     {
+         ui->lineEdit_name->setText("");
+         ui->lineEdit_surname->setText("");
+         ui->lineEdit_sex->setText("");
+         ui->lineEdit_pesel->setText("");
+         ui->lineEdit_dateOfBirth->setText("");
+         ui->lineEdit_title->setText("");
+         ui->lineEdit_listOfSubjects->setText("");
+     }
 
 }
 

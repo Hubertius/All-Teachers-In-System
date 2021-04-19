@@ -5,6 +5,7 @@
 #include <QtSql>
 #include <QtDebug>
 #include <QSqlError>
+#include "../utils.h"
 namespace Ui
 {
     class Update;
@@ -18,7 +19,12 @@ namespace HubertiusNamespace
 
     public:
         explicit Update(QWidget *parent, QSqlDatabase * database);
+        friend bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString listOfSubjects);
+        void clearingLineEdits();
         ~Update();
+
+    private slots:
+        void on_pushButton_clicked();
 
     private:
         QSqlDatabase * myTeachersDatabase;

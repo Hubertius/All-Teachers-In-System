@@ -3,7 +3,9 @@
 #include <QWidget>
 #include <QtSql>
 #include <QtDebug>
+#include <QSqlQueryModel>
 #include <QSqlError>
+#include "../utils.h"
 
 namespace Ui
 {
@@ -19,6 +21,7 @@ namespace HubertiusNamespace
 
     public:
         explicit Create(QWidget *parent, QSqlDatabase * database);
+         void clearingLineEdits();
         ~Create();
 
     private slots:

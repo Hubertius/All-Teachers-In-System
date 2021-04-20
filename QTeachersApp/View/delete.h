@@ -5,6 +5,8 @@
 #include <QtSql>
 #include <QtDebug>
 #include <QSqlError>
+#include "../utils.h"
+
 namespace Ui
 {
     class Delete;
@@ -18,7 +20,12 @@ namespace HubertiusNamespace
 
     public:
         explicit Delete(QWidget *parent, QSqlDatabase * database);
+        friend bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString listOfSubjects);
+        void clearingLineEdits();
         ~Delete();
+
+    private slots:
+        void on_pushButton_clicked();
 
     private:
         QSqlDatabase * myTeachersDatabase;

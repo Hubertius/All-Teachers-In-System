@@ -3,9 +3,9 @@
 namespace HubertiusNamespace
 {
 
-    bool connOpen(QSqlDatabase * myDatabase, const QString & PATH)
+    bool connOpen(QSqlDatabase * myDatabase, QString  path)
     {
-        (*myDatabase).setDatabaseName(PATH);
+        (*myDatabase).setDatabaseName(path);
         if((*myDatabase).open())
         {
             qDebug() << "Connected to database.";

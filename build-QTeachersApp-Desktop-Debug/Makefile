@@ -403,11 +403,13 @@ compiler_moc_header_make_all: moc_create.cpp moc_delete.cpp moc_loginwindow.cpp 
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_create.cpp moc_delete.cpp moc_loginwindow.cpp moc_mainview.cpp moc_read.cpp moc_update.cpp
 moc_create.cpp: ../QTeachersApp/View/create.h \
+		../QTeachersApp/utils.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/create.h -o moc_create.cpp
 
 moc_delete.cpp: ../QTeachersApp/View/delete.h \
+		../QTeachersApp/utils.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/delete.h -o moc_delete.cpp
@@ -431,6 +433,7 @@ moc_read.cpp: ../QTeachersApp/View/read.h \
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/read.h -o moc_read.cpp
 
 moc_update.cpp: ../QTeachersApp/View/update.h \
+		../QTeachersApp/utils.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/hubertius/All-Teachers-In-System/build-QTeachersApp-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/hubertius/All-Teachers-In-System/QTeachersApp -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../QTeachersApp/View/update.h -o moc_update.cpp
@@ -477,10 +480,12 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ####### Compile
 
 create.o: ../QTeachersApp/View/create.cpp ../QTeachersApp/View/create.h \
+		../QTeachersApp/utils.h \
 		ui_create.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o create.o ../QTeachersApp/View/create.cpp
 
 delete.o: ../QTeachersApp/View/delete.cpp ../QTeachersApp/View/delete.h \
+		../QTeachersApp/utils.h \
 		ui_delete.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o delete.o ../QTeachersApp/View/delete.cpp
 
@@ -489,6 +494,7 @@ read.o: ../QTeachersApp/View/read.cpp ../QTeachersApp/View/read.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o read.o ../QTeachersApp/View/read.cpp
 
 update.o: ../QTeachersApp/View/update.cpp ../QTeachersApp/View/update.h \
+		../QTeachersApp/utils.h \
 		ui_update.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o update.o ../QTeachersApp/View/update.cpp
 

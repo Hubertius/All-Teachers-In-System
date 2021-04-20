@@ -17,16 +17,18 @@ namespace HubertiusNamespace
         delete ui;
     }
 
+    void Read::on_pushButton_clicked()
+    {
+        QSqlQueryModel * model = new QSqlQueryModel();
+        QSqlQuery * query = new QSqlQuery(*myTeachersDatabase);
+        query->prepare("SELECT * FROM Teachers");
+        if(query->exec())
+        {
+            model->setQuery(*query);
+            ui->tableView->setModel(model);
+        }
+    }
+
 }
 
-void HubertiusNamespace::Read::on_pushButton_clicked()
-{
-    QSqlQueryModel * model = new QSqlQueryModel();
-    QSqlQuery * query = new QSqlQuery(*myTeachersDatabase);
-    query->prepare("SELECT * FROM Teachers");
-    if(query->exec())
-    {
-        model->setQuery(*query);
-        ui->tableView->setModel(model);
-    }
-}
+

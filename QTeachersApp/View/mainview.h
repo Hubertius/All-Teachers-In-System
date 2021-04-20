@@ -30,7 +30,7 @@ namespace HubertiusNamespace
         Update & m_updateTab;
         Delete & m_deleteTab;
         QSqlDatabase myTeachersDatabase;
-        const QString & PATH = "/home/hubertius/All-Teachers-In-System/QTeachersApp/DataBases/teachers.sqlite";
+        QString path;
         Ui::MainView *ui;
 
     public:

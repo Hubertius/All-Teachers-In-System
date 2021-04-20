@@ -9,7 +9,10 @@ namespace HubertiusNamespace
     {
         ui->setupUi(this);
         myDatabase = QSqlDatabase::addDatabase("QSQLITE");
-        connOpen(&myDatabase, PATH);
+        QDir tempPath = QDir::current();
+        tempPath.cdUp();
+        qDebug() << tempPath.path() + "/QTeachersApp/DataBases/login.sqlite";
+        connOpen(&myDatabase, tempPath.path() + "/QTeachersApp/DataBases/login.sqlite");
     }
 
     LoginWindow::~LoginWindow()
@@ -54,26 +57,6 @@ namespace HubertiusNamespace
         }
     }
 
-    /*bool LoginWindow::connOpen()
-    {
-        myDatabase = QSqlDatabase::addDatabase("QSQLITE");
-        myDatabase.setDatabaseName("/home/hubertius/All-Teachers-In-System/QTeachersApp/DataBases/login.sqlite");
-        if(myDatabase.open())
-        {
-            qDebug() << "Connected to database.";
-            return true;
-        }
-        else
-        {
-            qDebug() << "Failed to open the database!";
-        }
-        return false;
-    }
 
-    void LoginWindow::connClose()
-    {
-        myDatabase.close();
-        myDatabase.removeDatabase(QSqlDatabase::defaultConnection);
-    }*/
 
 }

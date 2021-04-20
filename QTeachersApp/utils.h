@@ -9,12 +9,13 @@
 #include <QFileInfo>
 #include <QSqlError>
 #include <QRegExp>
+#include <QDir>
 
 namespace HubertiusNamespace
 {
 
     void connClose(QSqlDatabase * myDatabase);
-    bool connOpen(QSqlDatabase * myDatabase, const QString & PATH);
+    bool connOpen(QSqlDatabase * myDatabase, QString  path);
     bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString);
     bool peselValidation(QString pesel);
     bool isStartingWithUpper(QString name, QString surname, QString title, QString listOfSubjects);

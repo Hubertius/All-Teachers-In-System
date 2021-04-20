@@ -30,14 +30,34 @@ namespace HubertiusNamespace
         if((*myTeachersDatabase).isOpen())
         {
             qInfo("I'm in creation mode right now!");
-            if( !dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) )
+            QSqlQuery querySelect;
+            querySelect.prepare("SELECT * FROM Teachers");
+            querySelect.exec();
+            bool checkForEqualisation = false; // if the same data (with only diffrence being another "ID") are already in teachers.sqlite database
+            while(querySelect.next())
             {
+                   if(name == querySelect.value(1).toString()
+                      && surname == querySelect.value(2).toString()
+                      && sex == querySelect.value(3).toString()
+                      && pesel == querySelect.value(4).toString()
+                      && dateOfBirth == querySelect.value(5).toString()
+                      && title == querySelect.value(6).toString()
+                      && listOfSubjects == querySelect.value(7).toString())
+                    {
+                        checkForEqualisation = true;
+                        qDebug() << "Creating your new \"teacher\" will be imposssible, because he already is in our database (only with another id).";
+                    }
+
+            }
+            if( !dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) || checkForEqualisation)
+            {
+
                 clearingLineEdits();
                 return;
             }
-            QSqlQuery query;
-            query.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES ('"+name+"', '"+surname+"', '"+sex+"', '"+pesel+"', '"+dateOfBirth+"', '"+title+"', '"+listOfSubjects+"')");
-            if(query.exec())
+            QSqlQuery queryCreate;
+            queryCreate.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES ('"+name+"', '"+surname+"', '"+sex+"', '"+pesel+"', '"+dateOfBirth+"', '"+title+"', '"+listOfSubjects+"')");
+            if(queryCreate.exec())
             {
                 qInfo() << "Everything is working and you querry was added to your teachers database. :)";
             }
@@ -47,7 +67,7 @@ namespace HubertiusNamespace
             }
 
          }
-       clearingLineEdits();
+         clearingLineEdits();
      }
 
      void Create::clearingLineEdits()

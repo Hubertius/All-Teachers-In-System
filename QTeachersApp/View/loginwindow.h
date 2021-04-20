@@ -3,7 +3,7 @@
 
 #include <QMainWindow> 
 #include "mainview.h"
-#include "utils.h"
+#include "../utils.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -27,8 +27,8 @@ namespace HubertiusNamespace
         void on_btnLogin_clicked();
 
     private:
-        const QString & PATH = "/home/hubertius/All-Teachers-In-System/QTeachersApp/DataBases/login.sqlite";
-        QSqlDatabase  myDatabase;
+        QString path;
+        QSqlDatabase myDatabase;
         Ui::LoginWindow *ui;
 
     public:

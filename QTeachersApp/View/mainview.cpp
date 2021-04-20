@@ -18,7 +18,9 @@ namespace HubertiusNamespace
     {
         ui->setupUi(this);
         myTeachersDatabase = QSqlDatabase::addDatabase("QSQLITE");
-        connOpen(&myTeachersDatabase, PATH);
+        QDir tempPath = QDir::current();
+        tempPath.cdUp(); // to get out from /.../build-QTeachersApp-Desktop-Debug one folder up into /All-Teachers-In-System
+        connOpen(&myTeachersDatabase, tempPath.path() + "/QTeachersApp/DataBases/teachers.sqlite");
         ui->loReadTab->addWidget(&m_readTab);
         ui->loCreateTab->addWidget(&m_createTab);
         ui->loUpdateTab->addWidget(&m_updateTab);

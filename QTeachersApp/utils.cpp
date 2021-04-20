@@ -3,7 +3,7 @@
 namespace HubertiusNamespace
 {
 
-    bool connOpen(QSqlDatabase * myDatabase, QString  path)
+    bool connOpen(QSqlDatabase * myDatabase, QString  path) // function is opening connection with database
     {
         (*myDatabase).setDatabaseName(path);
         if((*myDatabase).open())
@@ -18,13 +18,13 @@ namespace HubertiusNamespace
         return false;
     }
 
-    void connClose(QSqlDatabase * myDatabase)
+    void connClose(QSqlDatabase * myDatabase) // function is closing connection with database
     {
         (*myDatabase).close();
         (*myDatabase).removeDatabase(QSqlDatabase::defaultConnection);
     }
 
-    bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString listOfSubjects)
+    bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString listOfSubjects) // function is validating data
     {
         QString stringwithNumber = "0123456789";
         QString toSearchForDigigits = name + surname + sex + title;

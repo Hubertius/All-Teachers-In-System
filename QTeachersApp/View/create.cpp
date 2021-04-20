@@ -19,6 +19,7 @@ namespace HubertiusNamespace
 
     void Create::on_pushButton_clicked()
     {
+        // Getting data from lineEdits of ui - START OF CODE
         QString name, surname, sex, pesel, dateOfBirth, title, listOfSubjects;
         name = ui->lineEdit_name->text();
         surname = ui->lineEdit_surname->text();
@@ -27,9 +28,11 @@ namespace HubertiusNamespace
         dateOfBirth = ui->lineEdit_dateOfBirth->text();
         title = ui->lineEdit_title->text();
         listOfSubjects = ui->lineEdit_listOfSubjects->text();
+        // Getting data from lineEdits of ui - END OF CODE
         if((*myTeachersDatabase).isOpen())
         {
             qInfo("I'm in creation mode right now!");
+            // Checking if there is the same data in database already - START OF CODE
             QSqlQuery querySelect;
             querySelect.prepare("SELECT * FROM Teachers");
             querySelect.exec();
@@ -55,6 +58,8 @@ namespace HubertiusNamespace
                 clearingLineEdits();
                 return;
             }
+            // Checking if there is the same data in database already - END OF CODE
+            // Creation of new teacher - START OF CODE
             QSqlQuery queryCreate;
             queryCreate.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES ('"+name+"', '"+surname+"', '"+sex+"', '"+pesel+"', '"+dateOfBirth+"', '"+title+"', '"+listOfSubjects+"')");
             if(queryCreate.exec())
@@ -65,12 +70,13 @@ namespace HubertiusNamespace
             {
                 qDebug() << "Something went terribly wrong.";
             }
+            // Creation of new teacher - END OF CODE
 
          }
          clearingLineEdits();
      }
 
-     void Create::clearingLineEdits()
+     void Create::clearingLineEdits() // function is making line edits "empty" after all operations, whatever they are
      {
          ui->lineEdit_name->setText("");
          ui->lineEdit_surname->setText("");

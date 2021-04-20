@@ -21,12 +21,13 @@ namespace HubertiusNamespace
     void Delete::on_pushButton_clicked()
     {
         bool checkForIntId;
-        int id = ui->lineEdit_id->text().toInt(&checkForIntId, 10);
+        int id = ui->lineEdit_id->text().toInt(&checkForIntId, 10); // coversion of ID into int in Qt
         if(checkForIntId == false)
         {
             qDebug() << "ID, which you wrote is not even an integer!";
             return;
         }
+        // Getting data from lineEdits of ui - START OF CODE
         QString name = ui->lineEdit_name->text();
         QString surname = ui->lineEdit_surname->text();
         QString sex = ui->lineEdit_sex->text();
@@ -34,10 +35,12 @@ namespace HubertiusNamespace
         QString dateOfBirth = ui->lineEdit_dateOfBirth->text();
         QString title = ui->lineEdit_title->text();
         QString listOfSubjects = ui->lineEdit_listOfSubjects->text();
+        // Getting data from lineEdits of ui - END OF CODE
         bool checkForEqualisation = false;
 
         if((*myTeachersDatabase).isOpen())
         {
+            // Checking if there is the same data in database already - START OF CODE
             QSqlQuery querySelect;
             querySelect.prepare("SELECT * FROM Teachers");
             querySelect.exec();
@@ -77,6 +80,8 @@ namespace HubertiusNamespace
                 clearingLineEdits();
                 return;
             }
+            // Checking if there is the same data in database already - END OF CODE
+            // Removing data in database if they exist - START OF CODE
             if(checkForEqualisation)
             {
                 QSqlQuery queryDelete;
@@ -90,6 +95,7 @@ namespace HubertiusNamespace
                     QMessageBox::critical(this,tr("ERROR WITH QUERY!"),queryDelete.lastError().text());
                 }
             }
+            // Removing data in databe if they exist - END OF CODE
             clearingLineEdits();
         }
 

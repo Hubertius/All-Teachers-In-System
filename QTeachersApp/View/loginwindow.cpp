@@ -10,7 +10,7 @@ namespace HubertiusNamespace
         ui->setupUi(this);
         myDatabase = QSqlDatabase::addDatabase("QSQLITE");
         QDir tempPath = QDir::current();
-        tempPath.cdUp();
+        tempPath.cdUp();  // to get out from /.../build-QTeachersApp-Desktop-Debug one folder up into /All-Teachers-In-System
         qDebug() << tempPath.path() + "/QTeachersApp/DataBases/login.sqlite";
         connOpen(&myDatabase, tempPath.path() + "/QTeachersApp/DataBases/login.sqlite");
     }
@@ -38,10 +38,6 @@ namespace HubertiusNamespace
                qInfo() << "Querry error: " << query.lastError().text();
                ui->lineEditUsername->setText("");
                ui->lineEditPassword->setText("");
-            }
-            else if(!query.first()) //
-            {
-                ui->label_ConnStat->setText("Incorrect username or pasword!");
             }
             else
             {

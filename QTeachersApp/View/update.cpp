@@ -27,6 +27,7 @@ namespace HubertiusNamespace
             qDebug() << "ID, which you wrote is not even an integer!";
             return;
         }
+        // Getting content from line edits - START OF CODE
         QString name = ui->lineEdit_name->text();
         QString surname = ui->lineEdit_surname->text();
         QString sex = ui->lineEdit_sex->text();
@@ -34,9 +35,10 @@ namespace HubertiusNamespace
         QString dateOfBirth = ui->lineEdit_dateOfBirth->text();
         QString title = ui->lineEdit_title->text();
         QString listOfSubjects = ui->lineEdit_listOfSubjects->text();
-
+        // Getting content from line edits - END OF CODE
         if((*myTeachersDatabase).isOpen())
         {
+            // Searching for id in database (without correct id nothing can't be changed) - START OF CODE
             QSqlQuery querySelect;
             querySelect.prepare("SELECT * FROM Teachers");
             querySelect.exec();
@@ -60,13 +62,15 @@ namespace HubertiusNamespace
                 clearingLineEdits();
                 return;
             }
-            if( !dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) )
+            // Searching for id in database  - END OF CODE
+            if( !dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) ) // validation of data to update
             {
                 clearingLineEdits();
                 return;
             }
             else
             {
+                // Updating data - START OF CODE
                 QSqlQuery queryUpdate;
                 queryUpdate.prepare("UPDATE Teachers SET Name = '"+name+"', Surname = '"+surname+"', Sex = '"+sex+"', PESEL = '"+pesel+"', DateOfBirth = '"+dateOfBirth+"', Title = '"+title+"', ListOfSubjects = '"+listOfSubjects+"' WHERE ID = '"+QString::number(id)+"'");
                 if(queryUpdate.exec())
@@ -77,6 +81,7 @@ namespace HubertiusNamespace
                 {
                    QMessageBox::critical(this,tr("ERROR WITH QUERY!"), queryUpdate.lastError().text());
                 }
+                // Updating data - END OF CODE
             }
             clearingLineEdits();
 

@@ -5,7 +5,7 @@ System zarządzania nauczycielami akademickimi
 * [How app 'works'] (#general-info)
 
 ## How app 'works'
-After start of the up login window is showing up. You need to write your correct "Username" and "Password" data.
+After start of the app login window is showing up. You need to write your correct "Username" and "Password" data.
 If you fail, you can make unlimited attempts again.
 If you are correct, new Window with "correct" content of the application will show up.
 There is "tab widget" with 4 pages:

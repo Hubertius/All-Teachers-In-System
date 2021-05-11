@@ -52,7 +52,7 @@ namespace HubertiusNamespace
                     }
 
             }
-            if( !dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) || checkForEqualisation)
+            if(!dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) || checkForEqualisation)
             {
 
                 clearingLineEdits();
@@ -61,7 +61,14 @@ namespace HubertiusNamespace
             // Checking if there is the same data in database already - END OF CODE
             // Creation of new teacher - START OF CODE
             QSqlQuery queryCreate;
-            queryCreate.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES ('"+name+"', '"+surname+"', '"+sex+"', '"+pesel+"', '"+dateOfBirth+"', '"+title+"', '"+listOfSubjects+"')");
+            queryCreate.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            queryCreate.addBindValue(name);
+            queryCreate.addBindValue(surname);
+            queryCreate.addBindValue(sex);
+            queryCreate.addBindValue(pesel);
+            queryCreate.addBindValue(dateOfBirth);
+            queryCreate.addBindValue(title);
+            queryCreate.addBindValue(listOfSubjects);
             if(queryCreate.exec())
             {
                 qInfo() << "Everything is working and you querry was added to your teachers database. :)";

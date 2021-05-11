@@ -85,7 +85,8 @@ namespace HubertiusNamespace
             if(checkForEqualisation)
             {
                 QSqlQuery queryDelete;
-                queryDelete.prepare("DELETE FROM Teachers WHERE ID = '"+QString::number(id)+"'");
+                queryDelete.prepare("DELETE FROM Teachers WHERE ID = ?");
+                queryDelete.addBindValue(QString::number(id));
                 if(queryDelete.exec())
                 {
                     QMessageBox::critical(this,tr("Delete"),tr("Deleted"));

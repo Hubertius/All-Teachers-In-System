@@ -48,7 +48,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    DataBases/guestLogin.txt \
     DataBases/login.db \
     DataBases/login.sqlite \
     DataBases/teachers.db \

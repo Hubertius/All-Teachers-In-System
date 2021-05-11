@@ -81,8 +81,7 @@ OBJECTS       = create.o \
 		moc_mainview.o \
 		moc_read.o \
 		moc_update.o
-DIST          = ../QTeachersApp/DataBases/guestLogin.txt \
-		../QTeachersApp/DataBases/login.db \
+DIST          = ../QTeachersApp/DataBases/login.db \
 		../QTeachersApp/DataBases/login.sqlite \
 		../QTeachersApp/DataBases/teachers.db \
 		../QTeachersApp/DataBases/teachers.sqlite \

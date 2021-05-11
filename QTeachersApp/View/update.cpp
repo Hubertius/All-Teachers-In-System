@@ -72,7 +72,15 @@ namespace HubertiusNamespace
             {
                 // Updating data - START OF CODE
                 QSqlQuery queryUpdate;
-                queryUpdate.prepare("UPDATE Teachers SET Name = '"+name+"', Surname = '"+surname+"', Sex = '"+sex+"', PESEL = '"+pesel+"', DateOfBirth = '"+dateOfBirth+"', Title = '"+title+"', ListOfSubjects = '"+listOfSubjects+"' WHERE ID = '"+QString::number(id)+"'");
+                queryUpdate.prepare("UPDATE Teachers SET Name = ?, Surname = ?, Sex = ?, PESEL = ?, DateOfBirth = ?, Title = ?, ListOfSubjects = ? WHERE ID = ?");
+                queryUpdate.addBindValue(name);
+                queryUpdate.addBindValue(surname);
+                queryUpdate.addBindValue(sex);
+                queryUpdate.addBindValue(pesel);
+                queryUpdate.addBindValue(dateOfBirth);
+                queryUpdate.addBindValue(title);
+                queryUpdate.addBindValue(listOfSubjects);
+                queryUpdate.addBindValue(QString::number(id));
                 if(queryUpdate.exec())
                 {
                     QMessageBox::critical(this,tr("Edit"), tr("Updated"));

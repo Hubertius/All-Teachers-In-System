@@ -4,8 +4,7 @@
 
 namespace HubertiusNamespace
 {
-
-    Delete::Delete(QWidget *parent, QSqlDatabase * database):
+    Delete::Delete(QWidget* parent, QSqlDatabase* database):
         myTeachersDatabase(database),
         QWidget(parent),
         ui(new Ui::Delete)
@@ -20,86 +19,83 @@ namespace HubertiusNamespace
 
     void Delete::on_pushButton_clicked()
     {
-        bool checkForIntId;
-        int id = ui->lineEdit_id->text().toInt(&checkForIntId, 10); // coversion of ID into int in Qt
-        if(checkForIntId == false)
+        if(isIdInt() == false)
         {
             qDebug() << "ID, which you wrote is not even an integer!";
             return;
         }
-        // Getting data from lineEdits of ui - START OF CODE
-        QString name = ui->lineEdit_name->text();
-        QString surname = ui->lineEdit_surname->text();
-        QString sex = ui->lineEdit_sex->text();
-        QString pesel = ui->lineEdit_pesel->text();
-        QString dateOfBirth = ui->lineEdit_dateOfBirth->text();
-        QString title = ui->lineEdit_title->text();
-        QString listOfSubjects = ui->lineEdit_listOfSubjects->text();
-        // Getting data from lineEdits of ui - END OF CODE
+        Teacher teacher;
+        fillTeacherToDelete(teacher);
         bool checkForEqualisation = false;
-
         if((*myTeachersDatabase).isOpen())
         {
             // Checking if there is the same data in database already - START OF CODE
             QSqlQuery querySelect;
             querySelect.prepare("SELECT * FROM Teachers");
             querySelect.exec();
-            bool checkForId = false;
             while(querySelect.next())
             {
-                int idInBase = querySelect.value(0).toInt();
-                if(idInBase == id)
+                bool temp;
+                int id = ui->lineEdit_id->text().toInt(&temp, 10);
+                if(isIdInt() && id == querySelect.value(0).toInt())
                 {
-                    checkForId = true;
-                    if(name == querySelect.value(1).toString()
-                       && surname == querySelect.value(2).toString()
-                       && sex == querySelect.value(3).toString()
-                       && pesel == querySelect.value(4).toString()
-                       && dateOfBirth == querySelect.value(5).toString()
-                       && title == querySelect.value(6).toString()
-                       && listOfSubjects == querySelect.value(7).toString())
-                    {
-                        checkForEqualisation = true;
-                    }
-                    else
-                    {
-                        clearingLineEdits();
-                        return;
-                    }
-
+                   if(teacher.name == querySelect.value(1).toString()
+                   && teacher.surname == querySelect.value(2).toString()
+                   && teacher.sex == querySelect.value(3).toString()
+                   && teacher.pesel == querySelect.value(4).toString()
+                   && teacher.dateOfBirth == querySelect.value(5).toString()
+                   && teacher.title == querySelect.value(6).toString()
+                   && teacher.listOfSubjects == querySelect.value(7).toString())
+                   {
+                       checkForEqualisation = true;
+                   }
+                   else
+                   {
+                       clearingLineEdits();
+                       return;
+                   }
                 }
-                qDebug() << idInBase;
             }
-            if(checkForId)
-            {
-                qDebug() << "There is id in database mathching it.";
-            }
-            else
-            {
-                qDebug() << "There is no id matching in teachers database.";
-                clearingLineEdits();
-                return;
-            }
-            // Checking if there is the same data in database already - END OF CODE
-            // Removing data in database if they exist - START OF CODE
             if(checkForEqualisation)
             {
-                QSqlQuery queryDelete;
-                queryDelete.prepare("DELETE FROM Teachers WHERE ID = ?");
-                queryDelete.addBindValue(QString::number(id));
-                if(queryDelete.exec())
-                {
-                    QMessageBox::critical(this,tr("Delete"),tr("Deleted"));
-                }
-                else
-                {
-                    QMessageBox::critical(this,tr("ERROR WITH QUERY!"),queryDelete.lastError().text());
-                }
+               deleteFromDatabase(teacher);
             }
-            // Removing data in databe if they exist - END OF CODE
             clearingLineEdits();
         }
+    }
 
+    void Delete::fillTeacherToDelete(Teacher& teacher)
+    {
+        teacher.name = ui->lineEdit_name->text();
+        teacher.surname = ui->lineEdit_surname->text();
+        teacher.sex = ui->lineEdit_sex->text();
+        teacher.pesel = ui->lineEdit_pesel->text();
+        teacher.dateOfBirth = ui->lineEdit_dateOfBirth->text();
+        teacher.title = ui->lineEdit_title->text();
+        teacher.listOfSubjects = ui->lineEdit_listOfSubjects->text();
+    }
+
+    bool Delete::isIdInt()
+    {
+        bool checkForIntId;
+        ui->lineEdit_id->text().toInt(&checkForIntId, 10);
+        return checkForIntId;
+    }
+
+    void Delete::deleteFromDatabase(Teacher& teacher)
+    {
+        QSqlQuery queryDelete;
+        queryDelete.prepare("DELETE FROM Teachers WHERE ID = ?");
+        bool toIntConversion;
+        queryDelete.addBindValue(QString::number(ui->lineEdit_id->text().toInt(&toIntConversion,10)));
+        if(queryDelete.exec())
+        {
+            QMessageBox::critical(this,tr("Delete"),tr("Deleted"));
+        }
+        else
+        {
+            QMessageBox::critical(this,tr("ERROR WITH QUERY!"),queryDelete.lastError().text());
+        }
     }
 
     void Delete::clearingLineEdits()
@@ -113,7 +109,6 @@ namespace HubertiusNamespace
         ui->lineEdit_title->setText("");
         ui->lineEdit_listOfSubjects->setText("");
     }
-
 }
 
 

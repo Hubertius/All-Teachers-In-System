@@ -14,13 +14,12 @@ QT_END_NAMESPACE
 
 namespace HubertiusNamespace
 {
-
     class LoginWindow : public QMainWindow
     {
         Q_OBJECT
 
     public:
-        LoginWindow(QWidget *parent = nullptr);
+        LoginWindow(QWidget* parent = nullptr);
         ~LoginWindow();
 
     private slots:
@@ -29,11 +28,11 @@ namespace HubertiusNamespace
     private:
         QString path;
         QSqlDatabase myDatabase;
-        Ui::LoginWindow *ui;
+        Ui::LoginWindow* ui;
 
     public:
-        friend void connClose(QSqlDatabase * myDatabase);
-        friend bool connOpen(QSqlDatabase * myDatabase, const QString & PATH);
+        friend void connClose(QSqlDatabase* myDatabase);
+        friend bool connOpen(QSqlDatabase* myDatabase, const QString & PATH);
     };
 }
 #endif // LOGINWINDOW_H

@@ -4,8 +4,7 @@
 
 namespace HubertiusNamespace
 {
-
-    Update::Update(QWidget *parent, QSqlDatabase * database):
+    Update::Update(QWidget* parent, QSqlDatabase* database):
         myTeachersDatabase(database),
         QWidget(parent),
         ui(new Ui::Update)
@@ -20,25 +19,15 @@ namespace HubertiusNamespace
 
     void Update::on_pushButton_clicked()
     {
-        bool checkForIntId;
-        int id = ui->lineEdit_id->text().toInt(&checkForIntId, 10);
-        if(checkForIntId == false)
+        if(isIdInt() == false)
         {
             qDebug() << "ID, which you wrote is not even an integer!";
             return;
         }
-        // Getting content from line edits - START OF CODE
-        QString name = ui->lineEdit_name->text();
-        QString surname = ui->lineEdit_surname->text();
-        QString sex = ui->lineEdit_sex->text();
-        QString pesel = ui->lineEdit_pesel->text();
-        QString dateOfBirth = ui->lineEdit_dateOfBirth->text();
-        QString title = ui->lineEdit_title->text();
-        QString listOfSubjects = ui->lineEdit_listOfSubjects->text();
-        // Getting content from line edits - END OF CODE
+        Teacher teacher;
+        fillTeacherToUpdate(teacher);
         if((*myTeachersDatabase).isOpen())
         {
-            // Searching for id in database (without correct id nothing can't be changed) - START OF CODE
             QSqlQuery querySelect;
             querySelect.prepare("SELECT * FROM Teachers");
             querySelect.exec();
@@ -46,55 +35,65 @@ namespace HubertiusNamespace
             while(querySelect.next())
             {
                 int idInBase = querySelect.value(0).toInt();
-                if(idInBase == id)
+                bool temp;
+                int idFromUser = ui->lineEdit_id->text().toInt(&temp, 10);
+                if(idInBase == idFromUser)
                 {
                     checkForId = true;
                 }
                 qDebug() << idInBase;
             }
-            if(checkForId)
+            if(checkForId == false || !dataValidation(teacher))
             {
-                qDebug() << "There is id in database mathching it.";
-            }
-            else
-            {
-                qDebug() << "There is no id matching in teachers database.";
+                qDebug() << "ERROR WITH ID OR DATA VALIDATION.";
                 clearingLineEdits();
                 return;
             }
-            // Searching for id in database  - END OF CODE
-            if( !dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) ) // validation of data to update
-            {
-                clearingLineEdits();
-                return;
-            }
-            else
-            {
-                // Updating data - START OF CODE
-                QSqlQuery queryUpdate;
-                queryUpdate.prepare("UPDATE Teachers SET Name = ?, Surname = ?, Sex = ?, PESEL = ?, DateOfBirth = ?, Title = ?, ListOfSubjects = ? WHERE ID = ?");
-                queryUpdate.addBindValue(name);
-                queryUpdate.addBindValue(surname);
-                queryUpdate.addBindValue(sex);
-                queryUpdate.addBindValue(pesel);
-                queryUpdate.addBindValue(dateOfBirth);
-                queryUpdate.addBindValue(title);
-                queryUpdate.addBindValue(listOfSubjects);
-                queryUpdate.addBindValue(QString::number(id));
-                if(queryUpdate.exec())
-                {
-                    QMessageBox::critical(this,tr("Edit"), tr("Updated"));
-                }
-                else
-                {
-                   QMessageBox::critical(this,tr("ERROR WITH QUERY!"), queryUpdate.lastError().text());
-                }
-                // Updating data - END OF CODE
-            }
+            updateIntoDatabase(teacher);
             clearingLineEdits();
-
         }
 
+    }
+
+    void Update::fillTeacherToUpdate(Teacher &teacher)
+    {
+        teacher.name = ui->lineEdit_name->text();
+        teacher.surname = ui->lineEdit_surname->text();
+        teacher.sex = ui->lineEdit_sex->text();
+        teacher.pesel = ui->lineEdit_pesel->text();
+        teacher.dateOfBirth = ui->lineEdit_dateOfBirth->text();
+        teacher.title = ui->lineEdit_title->text();
+        teacher.listOfSubjects = ui->lineEdit_listOfSubjects->text();
+    }
+
+    bool Update::isIdInt()
+    {
+        bool checkForIntId;
+        ui->lineEdit_id->text().toInt(&checkForIntId, 10);
+        return checkForIntId;
+    }
+
+    void Update::updateIntoDatabase(Teacher &teacher)
+    {
+        QSqlQuery queryUpdate;
+        queryUpdate.prepare("UPDATE Teachers SET Name = ?, Surname = ?, Sex = ?, PESEL = ?, DateOfBirth = ?, Title = ?, ListOfSubjects = ? WHERE ID = ?");
+        queryUpdate.addBindValue(teacher.name);
+        queryUpdate.addBindValue(teacher.surname);
+        queryUpdate.addBindValue(teacher.sex);
+        queryUpdate.addBindValue(teacher.pesel);
+        queryUpdate.addBindValue(teacher.dateOfBirth);
+        queryUpdate.addBindValue(teacher.title);
+        queryUpdate.addBindValue(teacher.listOfSubjects);
+        bool toIntConversion;
+        queryUpdate.addBindValue(QString::number(ui->lineEdit_id->text().toInt(&toIntConversion,10)));
+        if(queryUpdate.exec())
+        {
+            QMessageBox::critical(this,tr("Edit"), tr("Updated"));
+        }
+        else
+        {
+           QMessageBox::critical(this,tr("ERROR WITH QUERY!"), queryUpdate.lastError().text());
+        }
     }
 
     void Update::clearingLineEdits()
@@ -108,8 +107,6 @@ namespace HubertiusNamespace
         ui->lineEdit_title->setText("");
         ui->lineEdit_listOfSubjects->setText("");
     }
-
-
 }
 
 

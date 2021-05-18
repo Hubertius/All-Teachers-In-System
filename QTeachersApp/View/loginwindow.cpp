@@ -4,7 +4,7 @@
 
 namespace HubertiusNamespace
 {
-    LoginWindow::LoginWindow(QWidget *parent):
+    LoginWindow::LoginWindow(QWidget* parent):
         QMainWindow(parent),
         ui(new Ui::LoginWindow)
     {
@@ -21,10 +21,8 @@ namespace HubertiusNamespace
         delete ui;
     }
 
-
     void LoginWindow::on_btnLogin_clicked()
     {
-
         QString Username;
         QByteArray Password;
         Username = ui->lineEditUsername->text();
@@ -57,7 +55,4 @@ namespace HubertiusNamespace
             ui->lineEditPassword->setText("");
         }
     }
-
-
-
 }

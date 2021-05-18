@@ -17,15 +17,15 @@ namespace HubertiusNamespace
         Q_OBJECT
 
     public:
-        explicit Read(QWidget *parent, QSqlDatabase * database);
+        explicit Read(QWidget* parent, QSqlDatabase* database);
         ~Read();
 
     private slots:
         void on_pushButton_clicked();
 
     private:
-        QSqlDatabase * myTeachersDatabase;
-        Ui::Read *ui;
+        QSqlDatabase* myTeachersDatabase;
+        Ui::Read* ui;
     };
 }
 

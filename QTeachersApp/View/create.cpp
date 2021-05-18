@@ -1,5 +1,6 @@
 #include "create.h"
 #include "ui_create.h"
+#include <QMessageBox>
 
 namespace HubertiusNamespace
 {
@@ -18,68 +19,70 @@ namespace HubertiusNamespace
 
     void Create::on_pushButton_clicked()
     {
-        // Getting data from lineEdits of ui - START OF CODE
-        QString name, surname, sex, pesel, dateOfBirth, title, listOfSubjects;
-        name = ui->lineEdit_name->text();
-        surname = ui->lineEdit_surname->text();
-        sex = ui->lineEdit_sex->text();
-        pesel = ui->lineEdit_pesel->text();
-        dateOfBirth = ui->lineEdit_dateOfBirth->text();
-        title = ui->lineEdit_title->text();
-        listOfSubjects = ui->lineEdit_listOfSubjects->text();
-        // Getting data from lineEdits of ui - END OF CODE
+        Teacher teacher;
+        fillTeacherToCreate(teacher);
         if((*myTeachersDatabase).isOpen())
         {
             qInfo("I'm in creation mode right now!");
             QSqlQuery querySelect;
             querySelect.prepare("SELECT * FROM Teachers");
             querySelect.exec();
-            bool isDataDuplicated = false;
             while(querySelect.next())
             {
-                   if(name == querySelect.value(1).toString()
-                      && surname == querySelect.value(2).toString()
-                      && sex == querySelect.value(3).toString()
-                      && pesel == querySelect.value(4).toString()
-                      && dateOfBirth == querySelect.value(5).toString()
-                      && title == querySelect.value(6).toString()
-                      && listOfSubjects == querySelect.value(7).toString())
+                   if(teacher.name == querySelect.value(1).toString()
+                      && teacher.surname == querySelect.value(2).toString()
+                      && teacher.sex == querySelect.value(3).toString()
+                      && teacher.pesel == querySelect.value(4).toString()
+                      && teacher.dateOfBirth == querySelect.value(5).toString()
+                      && teacher.title == querySelect.value(6).toString()
+                      && teacher.listOfSubjects == querySelect.value(7).toString())
                     {
-                        isDataDuplicated = true;
                         qDebug() << "Creating your new \"teacher\" will be imposssible, because he already is in our database (only with another id).";
+                        clearingLineEdits();
+                        return;
                     }
-
             }
-            if(!dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) || isDataDuplicated)
+            if(dataValidation(teacher))
             {
-
-                clearingLineEdits();
-                return;
-            }
-            // Checking if there is the same data in database already - END OF CODE
-            // Creation of new teacher - START OF CODE
-            QSqlQuery queryCreate;
-            queryCreate.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            queryCreate.addBindValue(name);
-            queryCreate.addBindValue(surname);
-            queryCreate.addBindValue(sex);
-            queryCreate.addBindValue(pesel);
-            queryCreate.addBindValue(dateOfBirth);
-            queryCreate.addBindValue(title);
-            queryCreate.addBindValue(listOfSubjects);
-            if(queryCreate.exec())
-            {
-                qInfo() << "Everything is working and you querry was added to your teachers database. :)";
-            }
-            else
-            {
-                qDebug() << "Something went terribly wrong.";
-            }
-            // Creation of new teacher - END OF CODE
-
+                createIntoDatabase(teacher);
+            }     
          }
-         clearingLineEdits();
-     }
+        clearingLineEdits();
+    }
+
+    void Create::fillTeacherToCreate(Teacher& teacher)
+    {
+        teacher.name = ui->lineEdit_name->text();
+        teacher.surname = ui->lineEdit_surname->text();
+        teacher.sex = ui->lineEdit_sex->text();
+        teacher.pesel = ui->lineEdit_pesel->text();
+        teacher.dateOfBirth = ui->lineEdit_dateOfBirth->text();
+        teacher.title = ui->lineEdit_title->text();
+        teacher.listOfSubjects = ui->lineEdit_listOfSubjects->text();
+    }
+
+    void Create::createIntoDatabase(Teacher& teacher)
+    {
+        QSqlQuery queryCreate;
+        queryCreate.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        queryCreate.addBindValue(teacher.name);
+        queryCreate.addBindValue(teacher.surname);
+        queryCreate.addBindValue(teacher.sex);
+        queryCreate.addBindValue(teacher.pesel);
+        queryCreate.addBindValue(teacher.dateOfBirth);
+        queryCreate.addBindValue(teacher.title);
+        queryCreate.addBindValue(teacher.listOfSubjects);
+        if(queryCreate.exec())
+        {
+            qInfo() << "Everything is working and you querry was added to your teachers database. :)";
+            QMessageBox::critical(this,tr("Create"), tr("Created"));
+        }
+        else
+        {
+            qDebug() << "Something went terribly wrong.";
+            QMessageBox::critical(this,tr("ERROR WITH QUERY!"), queryCreate.lastError().text());
+        }
+    }
 
      void Create::clearingLineEdits()
      {
@@ -91,7 +94,6 @@ namespace HubertiusNamespace
          ui->lineEdit_title->setText("");
          ui->lineEdit_listOfSubjects->setText("");
      }
-
 }
 
 

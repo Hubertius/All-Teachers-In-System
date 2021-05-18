@@ -19,7 +19,7 @@ namespace HubertiusNamespace
         Q_OBJECT
 
     public:
-        explicit Delete(QWidget *parent, QSqlDatabase * database);
+        explicit Delete(QWidget* parent, QSqlDatabase* database);
         friend bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString listOfSubjects);
         void clearingLineEdits();
         ~Delete();
@@ -28,8 +28,11 @@ namespace HubertiusNamespace
         void on_pushButton_clicked();
 
     private:
-        QSqlDatabase * myTeachersDatabase;
-        Ui::Delete *ui;
+        QSqlDatabase* myTeachersDatabase;
+        void fillTeacherToDelete(Teacher& teacher);
+        bool isIdInt();
+        void deleteFromDatabase(Teacher& teacher);
+        Ui::Delete* ui;
     };
 }
 #endif // DELETE_H

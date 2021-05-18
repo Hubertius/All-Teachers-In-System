@@ -18,7 +18,7 @@ namespace HubertiusNamespace
         Q_OBJECT
 
     public:
-        explicit Update(QWidget *parent, QSqlDatabase * database);
+        explicit Update(QWidget* parent, QSqlDatabase* database);
         friend bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString listOfSubjects);
         void clearingLineEdits();
         ~Update();
@@ -27,8 +27,11 @@ namespace HubertiusNamespace
         void on_pushButton_clicked();
 
     private:
-        QSqlDatabase * myTeachersDatabase;
-        Ui::Update *ui;
+        QSqlDatabase* myTeachersDatabase;
+        void fillTeacherToUpdate(Teacher& teacher);
+        bool isIdInt();
+        void updateIntoDatabase(Teacher& teacher);
+        Ui::Update* ui;
     };
 }
 #endif // UPDATE_H

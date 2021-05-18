@@ -13,10 +13,20 @@
 
 namespace HubertiusNamespace
 {
+    struct Teacher
+    {
+        QString name;
+        QString surname;
+        QString sex;
+        QString pesel;
+        QString dateOfBirth;
+        QString title;
+        QString listOfSubjects;
+    };
 
-    void connClose(QSqlDatabase * myDatabase);
-    bool connOpen(QSqlDatabase * myDatabase, QString  path);
-    bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString);
+    void connClose(QSqlDatabase* myDatabase);
+    bool connOpen(QSqlDatabase* myDatabase, QString  path);
+    bool dataValidation(Teacher& teacher);
     bool peselValidation(QString pesel);
     bool isStartingWithUpper(QString name, QString surname, QString title, QString listOfSubjects);
     bool isValidDate(const QString day, const QString month, const QString year);

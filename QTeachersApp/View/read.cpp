@@ -3,8 +3,7 @@
 
 namespace HubertiusNamespace
 {
-
-    Read::Read(QWidget *parent, QSqlDatabase * database):
+    Read::Read(QWidget* parent, QSqlDatabase* database):
         myTeachersDatabase(database),
         QWidget(parent),
         ui(new Ui::Read)
@@ -19,8 +18,8 @@ namespace HubertiusNamespace
 
     void Read::on_pushButton_clicked()
     {
-        QSqlQueryModel * model = new QSqlQueryModel();
-        QSqlQuery * query = new QSqlQuery(*myTeachersDatabase);
+        QSqlQueryModel* model = new QSqlQueryModel();
+        QSqlQuery* query = new QSqlQuery(*myTeachersDatabase);
         query->prepare("SELECT * FROM Teachers");
         if(query->exec())
         {
@@ -28,7 +27,6 @@ namespace HubertiusNamespace
             ui->tableView->setModel(model);
         }
     }
-
 }
 
 

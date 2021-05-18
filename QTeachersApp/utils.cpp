@@ -2,7 +2,6 @@
 
 namespace HubertiusNamespace
 {
-
     bool connOpen(QSqlDatabase * myDatabase, QString  path) // function is opening connection with database
     {
         (*myDatabase).setDatabaseName(path);
@@ -24,11 +23,11 @@ namespace HubertiusNamespace
         (*myDatabase).removeDatabase(QSqlDatabase::defaultConnection);
     }
 
-    bool dataValidation(QString name, QString surname, QString sex, QString pesel, QString dateOfBirth, QString title, QString listOfSubjects) // function is validating data
+    bool dataValidation(Teacher& teacher) // function is validating data
     {
-        QString stringwithNumber = "0123456789";
-        QString toSearchForDigigits = name + surname + sex + title;
-        for(auto ch: stringwithNumber)
+        QString stringWithNumber = "0123456789";
+        QString toSearchForDigigits = teacher.name + teacher.surname + teacher.sex + teacher.title;
+        for(auto ch: stringWithNumber)
         {
             if(toSearchForDigigits.indexOf(ch, 0) != -1)
             {
@@ -36,14 +35,14 @@ namespace HubertiusNamespace
                 return false;
             }
         }
-        sex = sex.toLower();
-        if(sex != "male" && sex != "female")
+        teacher.sex = teacher.sex.toLower();
+        if(teacher.sex == "male" || teacher.sex == "female")
         {
             qDebug() << "There is something wrong with \"sex\"!";
             return false;
         }
         QRegExp reDigits("\\d*"); // a digit (\d), zero or motre times (*)
-        if(reDigits.exactMatch(pesel) && pesel.size() == 11 && peselValidation(pesel))
+        if(reDigits.exactMatch(teacher.pesel) && teacher.pesel.size() == 11 && peselValidation(teacher.pesel))
         {
             qDebug() << "PESEL is  completly constructed of 11 digits and is valid.";
         }
@@ -52,7 +51,7 @@ namespace HubertiusNamespace
             qDebug() << "PESEL is NOT constructed entirely with digits or got less or more than 11 characters.";
             return false;
         }
-        if(isStartingWithUpper(name, surname, title, listOfSubjects))
+        if(isStartingWithUpper(teacher.name, teacher.surname, teacher.title, teacher.listOfSubjects))
         {
             qDebug() << "Name, surname, title and list of subjects learned by teachers start with capital letter";
         }
@@ -60,11 +59,11 @@ namespace HubertiusNamespace
         {
             return false;
         }
-        if((dateOfBirth.at(2) == '.' && dateOfBirth.at(5) == '.'))
+        if((teacher.dateOfBirth.at(2) == '.' && teacher.dateOfBirth.at(5) == '.'))
         {
-            if(dateOfBirth.at(0).isDigit() && dateOfBirth.at(1).isDigit() && dateOfBirth.at(3).isDigit() && dateOfBirth.at(4).isDigit() && dateOfBirth.at(6).isDigit() && dateOfBirth.at(7).isDigit() && dateOfBirth.at(8).isDigit() && dateOfBirth.at(9).isDigit())
+            if(teacher.dateOfBirth.at(0).isDigit() && teacher.dateOfBirth.at(1).isDigit() && teacher.dateOfBirth.at(3).isDigit() && teacher.dateOfBirth.at(4).isDigit() && teacher.dateOfBirth.at(6).isDigit() && teacher.dateOfBirth.at(7).isDigit() && teacher.dateOfBirth.at(8).isDigit() && teacher.dateOfBirth.at(9).isDigit())
             {
-                if(!isValidDate(dateOfBirth.mid(0,2), dateOfBirth.mid(3, 2), dateOfBirth.mid(6, 4)))
+                if(!isValidDate(teacher.dateOfBirth.mid(0,2), teacher.dateOfBirth.mid(3, 2), teacher.dateOfBirth.mid(6, 4)))
                 {
                     return false;
                 }
@@ -76,32 +75,32 @@ namespace HubertiusNamespace
             qDebug() << "Your date you wrote to update is wrong!";
             return false;
         }
-        if( (name.size() == 0 || name.size() > 20) ) // Name == 0 || Name > 20
+        if( (teacher.name.size() == 0 || teacher.name.size() > 20) ) // Name == 0 || Name > 20
         {
             qDebug() << "Your name size is equal to 0 (\"empty\") or greater than 20! That's wrong!";
             return false;
         }
-        else if( (surname.size() == 0 || surname.size() > 20) ) // Surname == 0 || Surname > 20
+        else if( (teacher.surname.size() == 0 || teacher.surname.size() > 20) ) // Surname == 0 || Surname > 20
         {
             qDebug() << "Your surname size is equal to 0 (\"empty\") or greater than 20! That's wrong!";
             return false;
         }
-        else if( (sex.size() == 0 || sex.size() > 6) ) // Sex == 0 || Sex > 6
+        else if( (teacher.sex.size() == 0 || teacher.sex.size() > 6) ) // Sex == 0 || Sex > 6
         {
             qDebug() << "Your \"sex\" QString length is equal to 0 (\"empty\") or greater than 20! That's wrong!";
             return false;
         }
-        else if( (dateOfBirth.size() == 0 || dateOfBirth.size() > 10) )
+        else if( (teacher.dateOfBirth.size() == 0 || teacher.dateOfBirth.size() > 10) )
         {
             qDebug() << "Your date of birth with two characters of '.' is equal to 0 or greater than 10! That's wrong!";
             return false;
         }
-        else if( (title.size() == 0 || title.size() > 30) )
+        else if( (teacher.title.size() == 0 || teacher.title.size() > 30) )
         {
             qDebug() << "Your title is eual to 0 or greater than 20! That's wrong!";
             return false;
         }
-        else if( (listOfSubjects.size() == 0 || listOfSubjects.size() > 50) )
+        else if( (teacher.listOfSubjects.size() == 0 || teacher.listOfSubjects.size() > 50) )
         {
             qDebug() << "Your list of subjects leaded by profesor / teachers is equal to 0 or greater than 20.";
             qDebug() << "It's probably not possible... .";
@@ -111,11 +110,7 @@ namespace HubertiusNamespace
         {
             qDebug() << "Your data to update got correct length!";
         }
-
-
         return true; // if everything is "ok" validation function returns true
-
-
     }
 
     bool peselValidation(QString pesel)
@@ -134,7 +129,6 @@ namespace HubertiusNamespace
             return true;
         }
         return false;
-
     }
 
     bool isStartingWithUpper(QString name, QString surname, QString title, QString listOfSubjects)
@@ -154,32 +148,27 @@ namespace HubertiusNamespace
         return false;
     }
     
-
-    bool isValidDate(const QString day, const QString month, const QString year)
+    bool isValidDate(QString day, QString month, QString year)
     {
         bool checkForIntConv = true;
-
         int dayInt = day.toInt(&checkForIntConv, 10); // conversion of QString of day into int
         if(!checkForIntConv) // checking if QString day conversion to int is false
         {
             qDebug() << "Your day isn't even an integer!";
             return false;
         }
-
         int monthInt= month.toInt(&checkForIntConv, 10); // conversion of QString of month into int
         if(!checkForIntConv) // checking if QString month conversion to int is false
         {
            qDebug() << "Your month isn't even an integer!";
            return false;
         }
-
         int yearInt = year.toInt(&checkForIntConv, 10); // conversion of QString of year into int
         if(!checkForIntConv) // checking if QString year conversion to int is false
         {
             qDebug() << "Your year isn't even an integer!";
             return false;
         }
-
         // checking if year, month and day are in 'suitable' range - START OF CODE
         if(yearInt < 1940 || yearInt > 2000)
         {
@@ -196,7 +185,6 @@ namespace HubertiusNamespace
             qDebug() << "The day couldn't be below 1 or bre greater than 31!";
         }
         //  checking if year, month and day are in 'suitable' range - END OF CODE
-
         // checking if february is leap year and process of handling it - START OF CODE
         if(monthInt == 2)
         {
@@ -210,7 +198,6 @@ namespace HubertiusNamespace
             }
         }
         // checking if february is leap year and process of handling it - END OF CODE
-
         // April, June, Semptember and November can hava less or equal to 30 - START OF CODE
         if(monthInt == 4 || monthInt == 6 || monthInt == 9 || monthInt == 11)
         {
@@ -218,14 +205,10 @@ namespace HubertiusNamespace
         }
         // April, June, Semptember and November can hava less or equal to 30 - END OF CODE
         return true;
-
     }
 
     bool isLeap(int year)
     {
         return ( ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0) );
     }
-    
-
-
 }

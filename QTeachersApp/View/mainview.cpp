@@ -7,8 +7,7 @@
 
 namespace HubertiusNamespace
 {
-
-    MainView::MainView(QWidget *parent):
+    MainView::MainView(QWidget* parent):
         m_readTab(*new Read(this, &myTeachersDatabase)),
         m_createTab(*new Create(this, &myTeachersDatabase)),
         m_updateTab(*new Update(this, &myTeachersDatabase)),
@@ -32,5 +31,4 @@ namespace HubertiusNamespace
         connClose(&myTeachersDatabase);
         delete ui;
     }
-
 }

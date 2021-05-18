@@ -14,13 +14,12 @@ namespace Ui
 
 namespace HubertiusNamespace
 {
-
     class Create : public QWidget
     {
         Q_OBJECT
 
     public:
-        explicit Create(QWidget *parent, QSqlDatabase * database);
+        explicit Create(QWidget* parent, QSqlDatabase* database);
          void clearingLineEdits();
         ~Create();
 
@@ -28,8 +27,10 @@ namespace HubertiusNamespace
         void on_pushButton_clicked();
 
     private:
-        QSqlDatabase * myTeachersDatabase;
-        Ui::Create *ui;
+        QSqlDatabase* myTeachersDatabase;
+        void fillTeacherToCreate(Teacher& teacher);
+        void createIntoDatabase(Teacher& teacher);
+        Ui::Create* ui;
     };
 }
 #endif // CREATE_H

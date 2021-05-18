@@ -3,13 +3,12 @@
 
 namespace HubertiusNamespace
 {
-    Create::Create(QWidget *parent, QSqlDatabase * database):
+    Create::Create(QWidget* parent, QSqlDatabase*  database):
         myTeachersDatabase(database),
         QWidget(parent),
         ui(new Ui::Create)
     {
         ui->setupUi(this);
-
     }
 
     Create::~Create()
@@ -32,11 +31,10 @@ namespace HubertiusNamespace
         if((*myTeachersDatabase).isOpen())
         {
             qInfo("I'm in creation mode right now!");
-            // Checking if there is the same data in database already - START OF CODE
             QSqlQuery querySelect;
             querySelect.prepare("SELECT * FROM Teachers");
             querySelect.exec();
-            bool checkForEqualisation = false; // if the same data (with only diffrence being another "ID") are already in teachers.sqlite database
+            bool checkForEqualisation = false;
             while(querySelect.next())
             {
                    if(name == querySelect.value(1).toString()
@@ -52,7 +50,7 @@ namespace HubertiusNamespace
                     }
 
             }
-            if(!dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) || checkForEqualisation)
+            if(!dataValidation(name, surname, sex, pesel, dateOfBirth, title, listOfSubjects) || isDataDuplicated)
             {
 
                 clearingLineEdits();
@@ -83,7 +81,7 @@ namespace HubertiusNamespace
          clearingLineEdits();
      }
 
-     void Create::clearingLineEdits() // function is making line edits "empty" after all operations, whatever they are
+     void Create::clearingLineEdits()
      {
          ui->lineEdit_name->setText("");
          ui->lineEdit_surname->setText("");

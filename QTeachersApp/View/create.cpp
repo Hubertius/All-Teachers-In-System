@@ -34,7 +34,7 @@ namespace HubertiusNamespace
             QSqlQuery querySelect;
             querySelect.prepare("SELECT * FROM Teachers");
             querySelect.exec();
-            bool checkForEqualisation = false;
+            bool isDataDuplicated = false;
             while(querySelect.next())
             {
                    if(name == querySelect.value(1).toString()
@@ -45,7 +45,7 @@ namespace HubertiusNamespace
                       && title == querySelect.value(6).toString()
                       && listOfSubjects == querySelect.value(7).toString())
                     {
-                        checkForEqualisation = true;
+                        isDataDuplicated = true;
                         qDebug() << "Creating your new \"teacher\" will be imposssible, because he already is in our database (only with another id).";
                     }
 

@@ -31,7 +31,8 @@ namespace HubertiusNamespace
         QSqlDatabase* myTeachersDatabase;
         void fillTeacherToDelete(Teacher& teacher);
         bool isIdInt();
-        void deleteFromDatabase(Teacher& teacher);
+        bool isTeacherInDatabase(const Teacher& teacher);
+        void deleteFromDatabase(const Teacher& teacher);
         Ui::Delete* ui;
     };
 }

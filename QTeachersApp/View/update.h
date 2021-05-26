@@ -30,7 +30,8 @@ namespace HubertiusNamespace
         QSqlDatabase* myTeachersDatabase;
         void fillTeacherToUpdate(Teacher& teacher);
         bool isIdInt();
-        void updateIntoDatabase(Teacher& teacher);
+        bool isTeacherIdInDatabase(const Teacher& teacher);
+        void updateIntoDatabase(const Teacher& teacher);
         Ui::Update* ui;
     };
 }

@@ -28,34 +28,20 @@ namespace HubertiusNamespace
         fillTeacherToUpdate(teacher);
         if((*myTeachersDatabase).isOpen())
         {
-            QSqlQuery querySelect;
-            querySelect.prepare("SELECT * FROM Teachers");
-            querySelect.exec();
-            bool checkForId = false;
-            while(querySelect.next())
+            if(isTeacherIdInDatabase(teacher) && dataValidation(teacher))
             {
-                int idInBase = querySelect.value(0).toInt();
-                bool temp;
-                int idFromUser = ui->lineEdit_id->text().toInt(&temp, 10);
-                if(idInBase == idFromUser)
-                {
-                    checkForId = true;
-                }
-                qDebug() << idInBase;
+                updateIntoDatabase(teacher);
+                qDebug() << "Your \"teacher\" was succesfully updated in database!";
             }
-            if(checkForId == false || !dataValidation(teacher))
+            else
             {
-                qDebug() << "ERROR WITH ID OR DATA VALIDATION.";
-                clearingLineEdits();
-                return;
+                qDebug() << "Your \"teacher\" can't be updated!";
             }
-            updateIntoDatabase(teacher);
-            clearingLineEdits();
         }
-
+        clearingLineEdits();
     }
 
-    void Update::fillTeacherToUpdate(Teacher &teacher)
+    void Update::fillTeacherToUpdate(Teacher& teacher)
     {
         teacher.name = ui->lineEdit_name->text();
         teacher.surname = ui->lineEdit_surname->text();
@@ -73,7 +59,27 @@ namespace HubertiusNamespace
         return checkForIntId;
     }
 
-    void Update::updateIntoDatabase(Teacher &teacher)
+    bool Update::isTeacherIdInDatabase(const Teacher& teacher)
+    {
+        QSqlQuery querySelect;
+        querySelect.prepare("SELECT * FROM Teachers");
+        querySelect.exec();
+        bool checkForId = false;
+        while(querySelect.next())
+        {
+            int idInBase = querySelect.value(0).toInt();
+            bool temp;
+            int idFromUser = ui->lineEdit_id->text().toInt(&temp, 10);
+            if(idInBase == idFromUser)
+            {
+                return true;
+            }
+            qDebug() << idInBase;
+        }
+        return false;
+    }
+
+    void Update::updateIntoDatabase(const Teacher& teacher)
     {
         QSqlQuery queryUpdate;
         queryUpdate.prepare("UPDATE Teachers SET Name = ?, Surname = ?, Sex = ?, PESEL = ?, DateOfBirth = ?, Title = ?, ListOfSubjects = ? WHERE ID = ?");

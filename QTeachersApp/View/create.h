@@ -29,7 +29,8 @@ namespace HubertiusNamespace
     private:
         QSqlDatabase* myTeachersDatabase;
         void fillTeacherToCreate(Teacher& teacher);
-        void createIntoDatabase(Teacher& teacher);
+        bool isTeacherInDatabase(const Teacher& teacher);
+        void createIntoDatabase(const Teacher& teacher);
         Ui::Create* ui;
     };
 }

@@ -24,29 +24,19 @@ namespace HubertiusNamespace
         if((*myTeachersDatabase).isOpen())
         {
             qInfo("I'm in creation mode right now!");
-            QSqlQuery querySelect;
-            querySelect.prepare("SELECT * FROM Teachers");
-            querySelect.exec();
-            while(querySelect.next())
+            if(!isTeacherInDatabase(teacher))
             {
-                   if(teacher.name == querySelect.value(1).toString()
-                      && teacher.surname == querySelect.value(2).toString()
-                      && teacher.sex == querySelect.value(3).toString()
-                      && teacher.pesel == querySelect.value(4).toString()
-                      && teacher.dateOfBirth == querySelect.value(5).toString()
-                      && teacher.title == querySelect.value(6).toString()
-                      && teacher.listOfSubjects == querySelect.value(7).toString())
-                    {
-                        qDebug() << "Creating your new \"teacher\" will be imposssible, because he already is in our database (only with another id).";
-                        clearingLineEdits();
-                        return;
-                    }
+                if(dataValidation(teacher))
+                {
+                    createIntoDatabase(teacher);
+                    qDebug() << "Your created teacher was ADDED into the database!";
+                }
+                else
+                {
+                    qDebug() << "Adding your new \"teacher\" will be imposssible, because he already is in our database (only with another id).";
+                }
             }
-            if(dataValidation(teacher))
-            {
-                createIntoDatabase(teacher);
-            }     
-         }
+        }
         clearingLineEdits();
     }
 
@@ -61,7 +51,28 @@ namespace HubertiusNamespace
         teacher.listOfSubjects = ui->lineEdit_listOfSubjects->text();
     }
 
-    void Create::createIntoDatabase(Teacher& teacher)
+    bool Create::isTeacherInDatabase(const Teacher& teacher)
+    {
+        QSqlQuery querySelect;
+        querySelect.prepare("SELECT * FROM Teachers");
+        querySelect.exec();
+        while(querySelect.next())
+        {
+               if(teacher.name == querySelect.value(1).toString() 
+                  && teacher.surname == querySelect.value(2).toString()
+                  && teacher.sex == querySelect.value(3).toString()
+                  && teacher.pesel == querySelect.value(4).toString()
+                  && teacher.dateOfBirth == querySelect.value(5).toString()
+                  && teacher.title == querySelect.value(6).toString()
+                  && teacher.listOfSubjects == querySelect.value(7).toString())
+                {
+                    return true;
+                }
+        }
+        return false;
+    }
+
+    void Create::createIntoDatabase(const Teacher& teacher)
     {
         QSqlQuery queryCreate;
         queryCreate.prepare("INSERT INTO Teachers (Name, Surname, Sex, PESEL, DateOfBirth, Title, ListOfSubjects) VALUES (?, ?, ?, ?, ?, ?, ?)");

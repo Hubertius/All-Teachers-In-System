@@ -26,42 +26,19 @@ namespace HubertiusNamespace
         }
         Teacher teacher;
         fillTeacherToDelete(teacher);
-        bool checkForEqualisation = false;
         if((*myTeachersDatabase).isOpen())
-        {
-            // Checking if there is the same data in database already - START OF CODE
-            QSqlQuery querySelect;
-            querySelect.prepare("SELECT * FROM Teachers");
-            querySelect.exec();
-            while(querySelect.next())
-            {
-                bool temp;
-                int id = ui->lineEdit_id->text().toInt(&temp, 10);
-                if(isIdInt() && id == querySelect.value(0).toInt())
-                {
-                   if(teacher.name == querySelect.value(1).toString()
-                   && teacher.surname == querySelect.value(2).toString()
-                   && teacher.sex == querySelect.value(3).toString()
-                   && teacher.pesel == querySelect.value(4).toString()
-                   && teacher.dateOfBirth == querySelect.value(5).toString()
-                   && teacher.title == querySelect.value(6).toString()
-                   && teacher.listOfSubjects == querySelect.value(7).toString())
-                   {
-                       checkForEqualisation = true;
-                   }
-                   else
-                   {
-                       clearingLineEdits();
-                       return;
-                   }
-                }
-            }
-            if(checkForEqualisation)
+        {       
+            if(isTeacherInDatabase(teacher))
             {
                deleteFromDatabase(teacher);
+               qDebug() << "Your \"teacher\" was succesfully deleted from database.";
             }
-            clearingLineEdits();
+            else
+            {
+                qDebug() << "Your \"teacher\" can't be deleted from database.";
+            }
         }
+        clearingLineEdits();
     }
 
     void Delete::fillTeacherToDelete(Teacher& teacher)
@@ -82,7 +59,33 @@ namespace HubertiusNamespace
         return checkForIntId;
     }
 
-    void Delete::deleteFromDatabase(Teacher& teacher)
+    bool Delete::isTeacherInDatabase(const Teacher &teacher)
+    {
+        QSqlQuery querySelect;
+        querySelect.prepare("SELECT * FROM Teachers");
+        querySelect.exec();
+        while(querySelect.next())
+        {
+            bool temp;
+            int id = ui->lineEdit_id->text().toInt(&temp, 10);
+            if(isIdInt() && id == querySelect.value(0).toInt())
+            {
+               if(teacher.name == querySelect.value(1).toString()
+               && teacher.surname == querySelect.value(2).toString()
+               && teacher.sex == querySelect.value(3).toString()
+               && teacher.pesel == querySelect.value(4).toString()
+               && teacher.dateOfBirth == querySelect.value(5).toString()
+               && teacher.title == querySelect.value(6).toString()
+               && teacher.listOfSubjects == querySelect.value(7).toString())
+               {
+                   return true;
+               }
+            }
+        }
+        return false;
+    }
+
+    void Delete::deleteFromDatabase(const Teacher& teacher)
     {
         QSqlQuery queryDelete;
         queryDelete.prepare("DELETE FROM Teachers WHERE ID = ?");

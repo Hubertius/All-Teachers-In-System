@@ -2,7 +2,7 @@
 
 namespace HubertiusNamespace
 {
-    bool connOpen(QSqlDatabase * myDatabase, QString  path) // function is opening connection with database
+    bool connOpen(QSqlDatabase* myDatabase, QString  path) // function is opening connection with database
     {
         (*myDatabase).setDatabaseName(path);
         if((*myDatabase).open())
@@ -17,7 +17,7 @@ namespace HubertiusNamespace
         return false;
     }
 
-    void connClose(QSqlDatabase * myDatabase) // function is closing connection with database
+    void connClose(QSqlDatabase* myDatabase) // function is closing connection with database
     {
         (*myDatabase).close();
         (*myDatabase).removeDatabase(QSqlDatabase::defaultConnection);
@@ -36,7 +36,7 @@ namespace HubertiusNamespace
             }
         }
         teacher.sex = teacher.sex.toLower();
-        if(teacher.sex == "male" || teacher.sex == "female")
+        if(!(teacher.sex == "male" || teacher.sex == "female"))
         {
             qDebug() << "There is something wrong with \"sex\"!";
             return false;

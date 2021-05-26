@@ -33,7 +33,7 @@ namespace HubertiusNamespace
                 }
                 else
                 {
-                    qDebug() << "Adding your new \"teacher\" will be imposssible, because he already is in our database (only with another id).";
+                    qDebug() << "Adding your new \"teacher\" can't be completed!";
                 }
             }
         }

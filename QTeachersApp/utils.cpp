@@ -35,14 +35,14 @@ namespace HubertiusNamespace
                 return false;
             }
         }
-        teacher.sex = teacher.sex.toLower();
-        if(!(teacher.sex == "male" || teacher.sex == "female"))
+        QString sex = teacher.sex.toLower();
+        if(!(sex== "male" || sex == "female"))
         {
             qDebug() << "There is something wrong with \"sex\"!";
             return false;
         }
-        QRegExp reDigits("\\d*"); // a digit (\d), zero or motre times (*)
-        if(reDigits.exactMatch(teacher.pesel) && teacher.pesel.size() == 11 && peselValidation(teacher.pesel))
+        QRegularExpression reDigits("\\d*"); // a digit (\d), zero or motre times (*)
+        if(reDigits.match(teacher.pesel).hasMatch() && teacher.pesel.size() == 11 && peselValidation(teacher.pesel))
         {
             qDebug() << "PESEL is  completly constructed of 11 digits and is valid.";
         }

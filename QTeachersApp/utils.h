@@ -8,7 +8,7 @@
 #include <QtDebug>
 #include <QFileInfo>
 #include <QSqlError>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QDir>
 
 namespace HubertiusNamespace

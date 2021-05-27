@@ -16,7 +16,10 @@ namespace HubertiusNamespace
     class Create;
     class Update;
     class Delete;
-
+    /*!
+     *MainView class is practically "main body" of the app when login process to it is finished.
+     *This is detailed description of "MainView" class. More stuff in here.
+     */
     class MainView : public QDialog
     {
         Q_OBJECT

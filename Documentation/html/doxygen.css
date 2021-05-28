@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* The standard CSS for doxygen 1.9.1 */
+=======
+/* The standard CSS for doxygen 1.8.17 */
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
 
 body, table, div, p, dl {
 	font: 400 14px/22px Roboto,sans-serif;
@@ -66,7 +70,11 @@ p.startli, p.startdd {
 	margin-top: 2px;
 }
 
+<<<<<<< HEAD
 th p.starttd, th p.intertd, th p.endtd {
+=======
+th p.starttd, p.intertd, p.endtd {
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
         font-size: 100%;
         font-weight: 700;
 }
@@ -103,6 +111,7 @@ caption {
 }
 
 span.legend {
+<<<<<<< HEAD
 	font-size: 70%;
 	text-align: center;
 }
@@ -193,6 +202,32 @@ dt.alphachar{
 }
 
 
+=======
+        font-size: 70%;
+        text-align: center;
+}
+
+h3.version {
+        font-size: 90%;
+        text-align: center;
+}
+
+div.qindex, div.navtab{
+	background-color: #EBEFF6;
+	border: 1px solid #A3B4D7;
+	text-align: center;
+}
+
+div.qindex, div.navpath {
+	width: 100%;
+	line-height: 140%;
+}
+
+div.navtab {
+	margin-right: 15px;
+}
+
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
 /* @group Link Styling */
 
 a {
@@ -209,6 +244,20 @@ a:hover {
 	text-decoration: underline;
 }
 
+<<<<<<< HEAD
+=======
+a.qindex {
+	font-weight: bold;
+}
+
+a.qindexHL {
+	font-weight: bold;
+	background-color: #9CAFD4;
+	color: #FFFFFF;
+	border: 1px double #869DCA;
+}
+
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
 .contents a.qindexHL:visited {
         color: #FFFFFF;
 }
@@ -1413,12 +1462,19 @@ dl.citelist dt {
         font-weight:bold;
         margin-right:10px;
         padding:5px;
+<<<<<<< HEAD
         text-align:right;
         width:52px;
 }
 
 dl.citelist dd {
         margin:2px 0 2px 72px;
+=======
+}
+
+dl.citelist dd {
+        margin:2px 0;
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
         padding:5px 0;
 }
 
@@ -1481,12 +1537,15 @@ div.toc li.level4 {
         margin-left: 45px;
 }
 
+<<<<<<< HEAD
 span.emoji {
         /* font family used at the site: https://unicode.org/emoji/charts/full-emoji-list.html
          * font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
          */
 }
 
+=======
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
 .PageDocRTL-title div.toc li.level1 {
   margin-left: 0 !important;
   margin-right: 0;
@@ -1724,6 +1783,50 @@ tr.heading h2 {
 
 /* @group Markdown */
 
+<<<<<<< HEAD
+=======
+/*
+table.markdownTable {
+	border-collapse:collapse;
+        margin-top: 4px;
+        margin-bottom: 4px;
+}
+
+table.markdownTable td, table.markdownTable th {
+	border: 1px solid #2D4068;
+	padding: 3px 7px 2px;
+}
+
+table.markdownTableHead tr {
+}
+
+table.markdownTableBodyLeft td, table.markdownTable th {
+	border: 1px solid #2D4068;
+	padding: 3px 7px 2px;
+}
+
+th.markdownTableHeadLeft th.markdownTableHeadRight th.markdownTableHeadCenter th.markdownTableHeadNone {
+	background-color: #374F7F;
+	color: #FFFFFF;
+	font-size: 110%;
+	padding-bottom: 4px;
+	padding-top: 5px;
+}
+
+th.markdownTableHeadLeft {
+	text-align: left
+}
+
+th.markdownTableHeadRight {
+	text-align: right
+}
+
+th.markdownTableHeadCenter {
+	text-align: center
+}
+*/
+
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
 table.markdownTable {
 	border-collapse:collapse;
         margin-top: 4px;

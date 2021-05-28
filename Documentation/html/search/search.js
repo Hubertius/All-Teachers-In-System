@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
  @licstart  The following is the entire license notice for the JavaScript code in this file.
 
  The MIT License (MIT)
@@ -21,6 +22,29 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
  @licend  The above is the entire license notice for the JavaScript code in this file
+=======
+ @licstart  The following is the entire license notice for the
+ JavaScript code in this file.
+
+ Copyright (C) 1997-2017 by Dimitri van Heesch
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License along
+ with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+ @licend  The above is the entire license notice
+ for the JavaScript code in this file
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
  */
 function convertToId(search)
 {
@@ -80,10 +104,16 @@ function getYPos(item)
           storing this instance.  Is needed to be able to set timeouts.
    resultPath - path to use for external files
 */
+<<<<<<< HEAD
 function SearchBox(name, resultsPath, inFrame, label, extension)
 {
   if (!name || !resultsPath) {  alert("Missing parameters to SearchBox."); }
   if (!extension || extension == "") { extension = ".html"; }
+=======
+function SearchBox(name, resultsPath, inFrame, label)
+{
+  if (!name || !resultsPath) {  alert("Missing parameters to SearchBox."); }
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
 
   // ---------- Instance variables
   this.name                  = name;
@@ -98,7 +128,10 @@ function SearchBox(name, resultsPath, inFrame, label, extension)
   this.searchActive          = false;
   this.insideFrame           = inFrame;
   this.searchLabel           = label;
+<<<<<<< HEAD
   this.extension             = extension;
+=======
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
 
   // ----------- DOM Elements
 
@@ -203,9 +236,16 @@ function SearchBox(name, resultsPath, inFrame, label, extension)
         }
         return;
       }
+<<<<<<< HEAD
       else
       {
         window.frames.MSearchResults.postMessage("take_focus", "*");
+=======
+      else if (window.frames.MSearchResults.searchResults)
+      {
+        var elem = window.frames.MSearchResults.searchResults.NavNext(0);
+        if (elem) elem.focus();
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
       }
     }
     else if (e.keyCode==27) // Escape out of the search field
@@ -349,13 +389,21 @@ function SearchBox(name, resultsPath, inFrame, label, extension)
     if (idx!=-1)
     {
        var hexCode=idx.toString(16);
+<<<<<<< HEAD
        resultsPage = this.resultsPath + '/' + indexSectionNames[this.searchIndex] + '_' + hexCode + this.extension;
+=======
+       resultsPage = this.resultsPath + '/' + indexSectionNames[this.searchIndex] + '_' + hexCode + '.html';
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
        resultsPageWithSearch = resultsPage+'?'+escape(searchValue);
        hasResultsPage = true;
     }
     else // nothing available for this search term
     {
+<<<<<<< HEAD
        resultsPage = this.resultsPath + '/nomatches' + this.extension;
+=======
+       resultsPage = this.resultsPath + '/nomatches.html';
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
        resultsPageWithSearch = resultsPage;
        hasResultsPage = false;
     }
@@ -366,7 +414,11 @@ function SearchBox(name, resultsPath, inFrame, label, extension)
     if (domPopupSearchResultsWindow.style.display!='block')
     {
        var domSearchBox = this.DOMSearchBox();
+<<<<<<< HEAD
        this.DOMSearchClose().style.display = 'inline-block';
+=======
+       this.DOMSearchClose().style.display = 'inline';
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
        if (this.insideFrame)
        {
          var domPopupSearchResults = this.DOMPopupSearchResults();
@@ -441,12 +493,20 @@ function SearchResults(name)
 
       while (element && element!=parentElement)
       {
+<<<<<<< HEAD
         if (element.nodeName.toLowerCase() == 'div' && element.className == 'SRChildren')
+=======
+        if (element.nodeName == 'DIV' && element.className == 'SRChildren')
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
         {
           return element;
         }
 
+<<<<<<< HEAD
         if (element.nodeName.toLowerCase() == 'div' && element.hasChildNodes())
+=======
+        if (element.nodeName == 'DIV' && element.hasChildNodes())
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
         {
            element = element.firstChild;
         }

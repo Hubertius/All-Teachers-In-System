@@ -16,6 +16,7 @@ namespace HubertiusNamespace
     class Create;
     class Update;
     class Delete;
+<<<<<<< HEAD
     /*! \brief MainView class is practically "main body" of the app when Login class responsible for app working moves to it after successful login.
      *
      *  Tab widget of MainView got four pages with 4 classes added to it's content.\n
@@ -26,6 +27,11 @@ namespace HubertiusNamespace
      *  d) Delete - Delete class is responsible for it's content\n
      *  So this clas is responsible for working with instances of classes mentioned above and with opening and closing\n
      *  of teachers database.
+=======
+    /*!
+     *
+     *
+>>>>>>> 61aecf2d8c8b0d9a2190845ec39034700ed86d9d
      */
     class MainView : public QDialog
     {

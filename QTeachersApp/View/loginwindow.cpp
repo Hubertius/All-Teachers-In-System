@@ -18,6 +18,7 @@ namespace HubertiusNamespace
 
     LoginWindow::~LoginWindow()
     {
+        connClose(&myDatabase);
         delete ui;
     }
 

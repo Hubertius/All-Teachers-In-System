@@ -17,7 +17,7 @@ namespace HubertiusNamespace
     /*!
      * \brief The Delete class is responsible for operation of delete operations.
      *
-     * Delete teachers entries from teachers.sqlite database.
+     * Delete teachers entries from teachers.sqlite database.\n
      * If delete operation could be successful every data in teacher entry must be\n
      * the same as this written in QLineEdits.
      */
